@@ -40,7 +40,7 @@ include_once "header.php";
 
     <!-- Content of page goes here -->
     <div class="content">
-
+        
     </div>
 
 </body>

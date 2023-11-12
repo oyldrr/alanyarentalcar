@@ -14,7 +14,7 @@ session_start();
     
 </head>
 
-<body class="footer">
+<body>
 
 
     <!-- Copyrights -->

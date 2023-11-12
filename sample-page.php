@@ -10,7 +10,7 @@ require_once "config/connection.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Alanyarentalcar</title>
+    <title>Sample | Alanyarentalcar</title>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -37,17 +37,7 @@ require_once "config/connection.php";
     </div>
     <!-- Content of page -->
     <div class="content">
-        <a class="rent-btn btn btn-secondary mb-5" href="rent.php">
-            Rent a car!
-            <p>
-                (Please click to rent.)
-            </p>
-        </a>
-
-        <section id="insurance" class="mt-5">
-            <h3 class="text-capitalize">insurance</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat animi ex, enim amet debitis provident quo quidem! Sint culpa dolorum aliquid perferendis, id adipisci a suscipit temporibus tempore obcaecati rem.</p>
-        </section>
+    
     </div>
 
 </body>

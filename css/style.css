@@ -5,22 +5,29 @@
     box-sizing: border-box;
 }
 
-.header {
+/* Header copyright */
+.header-container {
+    display: flex;
+    justify-content: space-between;
     position: fixed;
     top: 0;
     z-index: 1001;
-    display: flex;
-    justify-content: space-between;
     width: 100%;
     padding: 1rem;
 }
 
-.footer {
+/* Footer Copyright */
+.footer-container {
     position: fixed;
     bottom: 0;
-    z-index: 1001;
+    z-index: 1000;
+    width: 100%;
 }
 
+/* Footer copyright */
+.copyright {
+    text-align: center;
+}
 
 /* Sidenav */
 .sidenav {
@@ -81,10 +88,36 @@
     color: #444;
 }
 
-.index {
-    display: block;
+/* Index Page - Content */
+.content {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: auto;
+    padding: 1rem;
+    width: 80%;
 }
 
-.content {
-    display: block;
+/* Index Page - Content/rent a car button */
+.rent-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 20rem;
+    height: 10rem;
+    font-size: 2.5em;
+
+    padding-top: .4em;
+
+    border-radius: 75px;
+}
+
+.rent-btn p {
+    font-size: .3em;
 }

@@ -23,18 +23,20 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="header">
+<body>
 
     <div class="logo-container">
-        <img src="assets/images/logo.png" alt="alanyarentalcar-logo">
+        <a href="index.php">
+            <img src="assets/images/logo.png" alt="alanyarentalcar-logo">
+        </a>
     </div>
 
-    <div class="navbar-buttons">
-        <a class="btn btn-primary" href="login.php">
+    <div class="navbar-buttons text-left mx-auto">
+        <a class="btn btn-danger" href="login.php">
             <i class="fas fa-user"></i>
             Login
         </a>
-        <a class="btn btn-primary" href="signup.php">
+        <a class="btn btn-danger" href="signup.php">
             <i class="fas fa-user-plus"></i>
             Signup
         </a>
@@ -52,33 +54,33 @@ session_start();
 
         <!-- Navbar links -->
         <a href="find-reservation.php"><span>
-            <i class="fas fa-magnifying-glass"></i>
-            Find reservation
-        </span></a>
+                <i class="fas fa-magnifying-glass"></i>
+                Find reservation
+            </span></a>
         <a href="about-us.php"><span>
-            <i class="fas fa-info-circle"></i>
-            About us
-        </span></a>
+                <i class="fas fa-info-circle"></i>
+                About us
+            </span></a>
         <a href="contact-us.php"><span>
-            <i class="fas fa-phone"></i>
-            Contact us
-        </span></a>
+                <i class="fas fa-phone"></i>
+                Contact us
+            </span></a>
         <a href="help-center.php">
             <i class="fas fa-comment"></i>
             <span>Help center</span>
         </a>
         <a href="rental-terms.php"><span>
-            <i class="fas fa-file"></i>
-            Rental terms
-        </span></a>
+                <i class="fas fa-file"></i>
+                Rental terms
+            </span></a>
         <a href="faq.php"><span>
-            <i class="fas fa-question-circle"></i>
-            FAQ
-        </span></a>
+                <i class="fas fa-question-circle"></i>
+                FAQ
+            </span></a>
         <a href="languages.php"><span>
-            <i class="fas fa-language"></i>
-            Languages
-        </span></a>
+                <i class="fas fa-language"></i>
+                Languages
+            </span></a>
         <!-- Navbar links -->
     </div>
 

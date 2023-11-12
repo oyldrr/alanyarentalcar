@@ -9,6 +9,10 @@
     position: fixed;
     top: 0;
     z-index: 1001;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
 }
 
 .footer {
@@ -18,56 +22,42 @@
 }
 
 
-/* Navbar */
-.navbar a {
-    font-size: 1.1em;
-    line-height: 24px;
-    color: #24292f;
-    text-decoration: none;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-.navbar li {
-    margin: auto 20px;
-}
-
-.navbar-nav.navbar-center {
-    position: absolute;
-    left: 50%;
-    transform: translatex(-50%);
-}
-
+/* Sidenav */
 .sidenav {
     height: 100%;
     width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
-    background-color: #040D21;
+    background-color: #f1f1f1;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
     border-radius: 15px;
 }
 
+/* Sidenav links */
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    text-align: center;
     margin-top: 1.5rem;
     text-decoration: none;
     font-size: 25px;
     font-weight: bold;
-    color: #818181;
+    color: #040D21;
     display: block;
     transition: 0.3s
 }
 
-.sidenav a:hover,
-.offcanvas a:focus {
-    color: #f1f1f1;
+.sidenav a span i {
+    margin-right: 1rem;
 }
 
+.sidenav a:hover,
+.offcanvas a:focus {
+    color: #0036b3;
+}
 
+/* Sidenav turn off button */
 .sidenav .closebtn {
     position: absolute;
     top: 0;
@@ -80,19 +70,21 @@
     right: 0;
 }
 
-.sidenav {
-    right: 0;
-}
-
+/* Sidenav turn on button */
 .openNav {
-    display: none;
+    display: flex;
     cursor: pointer;
     border: 1px solid #444;
     border-radius: 5px;
     font-size: 28px;
     padding: 0 .7rem;
-    position: absolute;
-    top: .7rem;
-    right: .7rem;
     color: #444;
+}
+
+.index {
+    display: block;
+}
+
+.content {
+    display: block;
 }

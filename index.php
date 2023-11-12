@@ -13,7 +13,7 @@ include_once "header.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index | Template</title>
+    <title>Home | Alanyarentalcar</title>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -40,7 +40,12 @@ include_once "header.php";
 
     <!-- Content of page goes here -->
     <div class="content">
+        <a class="mx-auto text-center btn" href="rent.php">Rent a car!</a>
         
+        <section id="insurance">
+            <h3>insurance</h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat animi ex, enim amet debitis provident quo quidem! Sint culpa dolorum aliquid perferendis, id adipisci a suscipit temporibus tempore obcaecati rem.</p>
+        </section>
     </div>
 
 </body>
@@ -48,7 +53,7 @@ include_once "header.php";
 <?php
 
 // Displaying footer
-include_once "footer.php";
+//include_once "footer.php";
 ?>
 
 <!-- Custom js -->

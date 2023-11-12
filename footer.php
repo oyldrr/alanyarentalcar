@@ -11,7 +11,7 @@ session_start();
 
     <!-- Custom Css -->
     <link rel="stylesheet" href="css/style.css" />
-
+    
 </head>
 
 <body class="footer">

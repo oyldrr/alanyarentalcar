@@ -32,11 +32,11 @@ session_start();
     </div>
 
     <div class="navbar-buttons text-left mx-auto">
-        <a class="btn btn-danger" href="login.php">
+        <a class="btn btn-yellow" href="login.php">
             <i class="fas fa-user"></i>
             Login
         </a>
-        <a class="btn btn-danger" href="signup.php">
+        <a class="btn btn-yellow" href="signup.php">
             <i class="fas fa-user-plus"></i>
             Signup
         </a>

@@ -5,8 +5,37 @@
     box-sizing: border-box;
 }
 
-/* Header copyright */
+/*
+
+Color Palette
+
+    dark - #313332
+    yellow - #fab710
+    light - #fdfffe
+
+*/
+
+/* Header */
+.btn-yellow {
+    background-color: #fab710;
+    color: #fdfffe;
+    
+}
+
+.btn-yellow:hover {
+    background-color: #ba8603;
+}
+
+.logo-container a img {
+    padding: 0;
+    margin: 0;
+    margin-top: -.5rem;
+    width: 10rem;
+    max-width: 200px;
+}
+
 .header-container {
+    background-color: #313332;
     display: flex;
     justify-content: space-between;
     position: fixed;
@@ -16,7 +45,7 @@
     padding: 1rem;
 }
 
-/* Footer Copyright */
+/* Footer */
 .footer-container {
     position: fixed;
     bottom: 0;
@@ -61,7 +90,7 @@
 
 .sidenav a:hover,
 .offcanvas a:focus {
-    color: #0036b3;
+    color: #fab710;
 }
 
 /* Sidenav turn off button */
@@ -81,11 +110,11 @@
 .openNav {
     display: flex;
     cursor: pointer;
-    border: 1px solid #444;
+    border: 1px solid #f1f1f1;
     border-radius: 5px;
     font-size: 28px;
     padding: 0 .7rem;
-    color: #444;
+    color: #f1f1f1;
 }
 
 /* Index Page - Content */
@@ -104,6 +133,9 @@
 
 /* Index Page - Content/rent a car button */
 .rent-btn {
+    background-color: #fab710;
+    border-color: #fdfffe;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -116,6 +148,11 @@
     padding-top: .4em;
 
     border-radius: 75px;
+}
+
+.rent-btn:hover {
+    background-color: #ba8603;
+    border-color: #f1f1f1;
 }
 
 .rent-btn p {

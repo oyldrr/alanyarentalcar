@@ -60,8 +60,8 @@ require_once "config/connection.php";
                                     </div>
                                 </div>
                                 <div class="mt-3 button-group d-flex justify-content-between">
-                                    <a href="forgot_password.php" class="btn btn-primary">Forgot Password?</a>
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <a href="forgot_password.php" class="btn btn-yellow">Forgot Password?</a>
+                                    <button type="submit" class="btn btn-yellow">Login</button>
                                 </div>
                             </form>
                         </div>

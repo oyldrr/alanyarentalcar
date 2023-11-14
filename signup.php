@@ -45,13 +45,15 @@ require_once "config/connection.php";
                         <div class="card-body">
                             <form action="signup.php" method="post">
                                 <div class="form-row">
-                                    <div class="form-group d-flex col-md-12">
-                                        <label for="name">Name:</label>
-                                        <br>
-                                        <input type="text" class="form-control" id="name" name="name" required>
-
-                                        <label for="surname">Surname:</label>
-                                        <input type="text" class="form-control" id="surname" name="surname" required>
+                                    <div class="form-group d-flex justify-content-between">
+                                        <div class="col-5">
+                                            <label for="name">Name:</label>
+                                            <input type="text" class="form-control" id="name" name="name" required>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="surname">Surname:</label>
+                                            <input type="text" class="form-control" id="surname" name="surname" required>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -67,7 +69,7 @@ require_once "config/connection.php";
                                     <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary">Signup</button>
+                                    <button type="submit" class="btn btn-yellow">Signup</button>
                                 </div>
                             </form>
                         </div>

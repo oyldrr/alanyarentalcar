@@ -30,17 +30,20 @@ session_start();
             <img src="assets/images/logo.png" alt="alanyarentalcar-logo">
         </a>
     </div>
-
-    <div class="navbar-buttons text-left mx-auto">
-        <a class="btn btn-yellow" href="login.php">
-            <i class="fas fa-user"></i>
-            Login
-        </a>
-        <a class="btn btn-yellow" href="signup.php">
-            <i class="fas fa-user-plus"></i>
-            Signup
-        </a>
-    </div>
+    <?php
+    if ($_SESSION['loggedin'] != true) {
+        echo "<div class='navbar-buttons text-left mx-auto'>
+            <a class='btn btn-yellow' href='login.php'>
+                <i class='fas fa-user'></i>
+                Login
+            </a>
+            <a class='btn btn-yellow' href='signup.php'>
+                <i class='fas fa-user-plus'></i>
+                Signup
+            </a>
+        </div>";
+    }
+    ?>
     <div class="openNav-container">
         <!-- Navbar turn on button -->
         <span class="openNav" onclick="openNav()">&#9776;</span>

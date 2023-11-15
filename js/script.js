@@ -8,23 +8,18 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0"; !important
 }
 
+// Verification Page
+function moveToNext(input) {
+  var nextInput = input.nextElementSibling;
 
-// Show/hide password functionality
-function togglePasswordVisibility() {
-  var passwordField = document.getElementById('password');
-  var eyeIcon = document.getElementById('togglePassword');
-
-  if (passwordField.type === 'password') {
-      passwordField.type = 'text';
-      eyeIcon.classList.remove('fa-eye-slash');
-      eyeIcon.classList.add('fa-eye');
-  } else {
-      passwordField.type = 'password';
-      eyeIcon.classList.remove('fa-eye');
-      eyeIcon.classList.add('fa-eye-slash');
+  // Move focus to the next input box if available
+  if (nextInput !== null) {
+    nextInput.focus();
+  }
+  else {
+    window.location.href = 'index.php';
   }
 }
-
 
 
 

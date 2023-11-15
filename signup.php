@@ -56,15 +56,15 @@ require_once "config/connection.php";
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="mt-3 form-group">
                                     <label for="email">Email:</label>
                                     <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="mt-3 form-group">
                                     <label for="password">Password:</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
-                                <div class="form-group form-check">
+                                <div class="mt-3 form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="terms" required>
                                     <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
                                 </div>

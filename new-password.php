@@ -10,7 +10,7 @@ require_once "config/connection.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Alanyarentalcar</title>
+    <title>New password | Alanyarentalcar</title>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -40,23 +40,25 @@ require_once "config/connection.php";
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                <h1 class="text-center">Login</h1>
+                    <h1 class="text-center">New Password</h1>
+                    <p>Please enter a new password.</p>
                     <div class="card">
                         <div class="card-body">
                             <form action="login.php" method="post">
-                                <div class="mt-3 form-group">
-                                    <label for="username">E-mail:</label>
-                                    <input type="text" class="form-control" id="email" name="email" required>
-                                </div>
                                 <div class="mt-3 form-group">
                                     <label for="password">Password:</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" id="password" name="password" required>
                                     </div>
+                                    <div class="mt-3 form-group">
+                                        <label for="confirm-password">Confirm Password:</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mt-3 button-group d-flex justify-content-between">
-                                    <a href="forgot-password.php" class="btn btn-yellow">Forgot Password?</a>
-                                    <button type="submit" class="btn btn-yellow">Login</button>
+                                <div class="mt-3 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-yellow ">Set new password</button>
                                 </div>
                             </form>
                         </div>

@@ -19,7 +19,7 @@ Color Palette
 .btn-yellow {
     background-color: #fab710;
     color: #fdfffe;
-    
+
 }
 
 .btn-yellow:hover {
@@ -157,4 +157,31 @@ Color Palette
 
 .rent-btn p {
     font-size: .3em;
+}
+
+/* Verification Page */
+.pin-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+}
+
+.pin-input {
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid #d7d7d7;
+    border-radius: 6px;
+    outline: none;
+    margin: 1px;
+    text-align: center;
+    margin: 0 1rem;
+    background: #eeeeee;
+    font-size: 20px;
+}
+
+.pin {
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
 }

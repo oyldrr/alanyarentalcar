@@ -29,6 +29,8 @@ require_once "config/connection.php";
 
 <body id="index">
 
+    <div class="background-container"></div>
+
     <div class="header-container">
         <?php
         // Displaying header

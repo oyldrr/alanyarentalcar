@@ -1,6 +1,78 @@
 <?php
+ob_start();
+
+// Initialize the session
 session_start();
+
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if (isset($_SESSION["loggedin"]) === true) {
+    header('location:index.php');
+    exit();
+}
+
+// Include config file
 require_once "config/connection.php";
+
+// signup | insertion
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = mysqli_real_escape_string($conn, $_POST['signup-email']);
+    $pwd = mysqli_real_escape_string($conn, $_POST['signup-password']);
+    $name = mysqli_real_escape_string($conn, $_POST['signup-name']);
+    $surname = mysqli_real_escape_string($conn, $_POST['signup-surname']);
+
+    // Prepare a select statement
+    $sql = "SELECT email FROM users WHERE email = ?";
+
+    if ($stmt = mysqli_prepare($conn, $sql)) {
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+        // Set parameters
+        $param_email = $email;
+
+        // Attempt to execute the prepared statement
+        if (mysqli_stmt_execute($stmt)) {
+            // Store result
+            mysqli_stmt_store_result($stmt);
+
+            // Check if username exists, if yes then verify password
+            if (mysqli_stmt_num_rows($stmt) == 1) {
+                mysqli_stmt_close($stmt);
+                header('location:login.php?username-already-exists');
+                exit();
+            } else {
+                mysqli_stmt_close($stmt);
+                $insert = "INSERT INTO `users` (`email`, `pwd`, `name`, `surname`) VALUES (?, ?, ?, ?)";
+
+                if ($stmt = mysqli_prepare($conn, $insert)) {
+                    // Bind variables to the prepared statement as parameters
+                    mysqli_stmt_bind_param($stmt, "ssss", $param_email, $param_password, $param_name, $param_surname);
+
+                    // Set parameters
+                    $param_email = $email;
+                    $param_password = password_hash($pwd, PASSWORD_DEFAULT); // Creates a password hash
+                    $param_name = $name;
+                    $param_surname = $surname;
+
+                    // Attempt to execute the prepared statement
+                    if (mysqli_stmt_execute($stmt)) {
+                        // Redirect to login page
+                        header('location: verification.php?registration=successfull');
+                        exit();
+                    } else {
+                        header('location: signup.php?error');
+                    }
+
+                    // Close statement
+                    mysqli_stmt_close($stmt);
+                } else {
+                    header('location: signup.php?mysqliproblem');
+                }
+            }
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,25 +120,25 @@ require_once "config/connection.php";
                                     <div class="form-group d-flex justify-content-between">
                                         <div class="col-5">
                                             <label for="name">Name:</label>
-                                            <input type="text" class="form-control" id="name" name="name" required>
+                                            <input type="text" class="form-control" id="name" name="signup-name" required>
                                         </div>
                                         <div class="col-6">
                                             <label for="surname">Surname:</label>
-                                            <input type="text" class="form-control" id="surname" name="surname" required>
+                                            <input type="text" class="form-control" id="surname" name="signup-surname" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mt-3 form-group">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <input type="email" class="form-control" id="email" name="signup-email" required>
                                 </div>
                                 <div class="mt-3 form-group">
                                     <label for="password">Password:</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <input type="password" class="form-control" id="password" name="signup-password" required>
                                 </div>
                                 <div class="mt-3 form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="terms" required>
-                                    <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
+                                    <label class="form-check-label" for="terms">I agree to the <a href="">terms</a> and <a href="">conditions</a></label>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-yellow">Signup</button>

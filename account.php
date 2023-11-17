@@ -11,8 +11,7 @@ if (isset($_SESSION["loggedin"]) !== true) {
 
 // Getting user data from the database based on the email stored in $_SESSION
 $email = $_SESSION["email"];
-$stmt = $conn->prepare('SELECT * FROM users WHERE email LIKE :email');
-$stmt->bind_param(':email', $email, PDO::PARAM_STR);
+$stmt = $conn->prepare("SELECT * FROM `users` WHERE email LIKE '" . $email . "'");
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
@@ -52,12 +51,25 @@ $row = $result->fetch_assoc();
     </div>
     <!-- Content of page -->
     <div class="content">
-        <h1>Account Details</h1>
-        <div class="mt-5 w-50 justify-content-start">
-            <h3 class="pt-5">Name: <?= $row['name'] ?> </h3>
-            <h3 class="pt-5">Surname: <?= $row['surname'] ?> </h3>
-            <h3 class="pt-5">Email address: <?= $row['email'] ?> </h3>
-            <h3 class="pt-5">Registration date: <?= $row['created_at']  ?> </h3>
+        <h1 class="mt-5 pt-5">Account Details</h1>
+        <div class="d-block text-center w-25 account-image-container">
+            <a href="upload-photo.php">
+                <img class="ease-in-out opacity-on-hover" width="50%" src="assets/images/account-image.jpg" alt="account-image">
+            </a>
+
+        </div>
+        <div class="mb-5 w-50 justify-content-start">
+            <label for="name"><b>Name: </b></label>
+            <input name="name" class="mb-3 form-control" readonly value="<?= $row['name']              ?>"></input>
+
+            <label for="name"><b>Surname: </b></label>
+            <input name="surname" class="mb-3 form-control" readonly value="<?= $row['surname']        ?>"></input>
+
+            <label for="name"><b>Email: </b></label>
+            <input name="email" class="mb-3 form-control" readonly value="<?= $row['email']            ?>"></input>
+
+            <label for="name"><b>Registration Date: </b></label>
+            <input name="created_at" class="mb-3 form-control" readonly value="<?= $row['created_at']  ?>"></input>
         </div>
     </div>
 

@@ -30,24 +30,42 @@ session_start();
             <img src="assets/images/logo.png" alt="alanyarentalcar-logo">
         </a>
     </div>
-    <?php
-    if ($_SESSION['loggedin'] != true) {
-        echo "<div class='navbar-buttons text-left mx-auto'>
-            <a class='btn btn-yellow' href='login.php'>
-                <i class='fas fa-user'></i>
-                Login
-            </a>
-            <a class='btn btn-yellow' href='signup.php'>
-                <i class='fas fa-user-plus'></i>
-                Signup
-            </a>
-        </div>";
-    }
-    ?>
-    <div class="openNav-container">
-        <!-- Navbar turn on button -->
-        <span class="openNav" onclick="openNav()">&#9776;</span>
-        <!-- Navbar turn on button -->
+    <div class="d-flex">
+
+        <?php
+        if ($_SESSION['loggedin'] != true) {
+            echo "
+                <div class='me-5'>
+                    <a class='btn btn-yellow me-2' href='login.php'>
+                        <i class='fas fa-user'></i>
+                        Login
+                    </a>
+                    <a class='btn btn-yellow' href='signup.php'>
+                        <i class='fas fa-user-plus'></i>
+                        Signup
+                    </a>
+                 </div>";
+        } else {
+            echo "
+                <div class='me-5'>
+                    <a class='btn btn-yellow me-2' href='logout.php'>
+                        <i class='fas fa-power-off'></i>
+                        Logout
+                    </a>
+                    <a class='btn btn-yellow me-2' href='account.php'>
+                        <i class='fas fa-user'></i>
+                        Account
+                    </a>
+                </div>
+            ";
+        }
+        ?>
+        <div class="openNav-container">
+            <!-- Navbar turn on button -->
+            <span class="openNav" onclick="openNav()">&#9776;</span>
+            <!-- Navbar turn on button -->
+        </div>
+
     </div>
 
     <div id="mySidenav" class="sidenav">

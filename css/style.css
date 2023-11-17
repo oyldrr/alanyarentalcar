@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+.ease-in-out{
+    transition: all ease-in-out .3s;
+}
+
+.opacity-on-hover:hover {
+    opacity: .5;
+}
+
 /*
 
 Color Palette
@@ -47,7 +55,7 @@ Color Palette
 
 /* Footer */
 .footer-container {
-    position: fixed;
+    position: relative;
     bottom: 0;
     z-index: 1000;
     width: 100%;
@@ -112,8 +120,8 @@ Color Palette
     cursor: pointer;
     border: 1px solid #f1f1f1;
     border-radius: 5px;
-    font-size: 28px;
-    padding: 0 .7rem;
+    font-size: 24px;
+    padding: 0 .5rem;
     color: #f1f1f1;
 }
 

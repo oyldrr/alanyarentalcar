@@ -110,4 +110,8 @@ session_start();
 <!-- Custom js -->
 <script src="js/script.js"></script>
 
+<script>
+  AOS.init();
+</script>
+
 </html>

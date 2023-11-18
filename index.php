@@ -39,7 +39,7 @@ require_once "config/connection.php";
     </div>
     <!-- Content of page -->
     <div class="mt-5 content">
-        <a class="mt-5 rent-btn btn btn-secondary mb-5" href="rent.php">
+        <a class="mt-5 rent-btn btn btn-secondary mb-5" href="rent.php" data-aos="fade-up">
             Rent a car!
             <p>
                 (Please click to rent.)
@@ -49,25 +49,34 @@ require_once "config/connection.php";
         <section id="insurance" class="mt-5">
             <div class="d-flex">
                 <div class="me-5">
-                    <h3 class="text-capitalize">Insurance and Collision Damage Waiver (CDW)</h3>
-                    <p>All of our cars are equipped with mandatory traffic insurance.
+                    <h3 class="text-capitalize" data-aos="fade-up" data-aos-delay="100">
+                        Insurance and Collision Damage Waiver (CDW)
+                    </h3>
+                    <p data-aos="fade-up" data-aos-delay="200">
+                        All of our cars are equipped with mandatory traffic insurance.
                         However, cars rented solely with "mandatory traffic insurance"
                         cover the expenses of <strong>Material Damage, Health Expenses,
                             Death, and Disability</strong> within the limits set by the
                         insurance company. <span class="text-danger">This insurance does not provide full coverage
                             to the renters</span> and may lead to the lessee bearing high expenses
-                        in the event of an accident.</p>
+                        in the event of an accident.
+                    </p>
 
-                    <p>All of our cars are covered by the Collision Damage Waiver (CDW) provided
+                    <p data-aos="fade-up" data-aos-delay="300">
+                        All of our cars are covered by the Collision Damage Waiver (CDW) provided
                         by Atlas Mutuel Insurance. The CDW service is an additional service,
                         comes with a specific fee, and is valid when purchased. In accidents
                         where the use of substances that impair vehicle control, such as alcohol
                         and drugs, is detected, the CDW is not valid, and all expenses and responsibilities
                         belong to the lessee. Our CDW has a 2% deductible; in the event of an accident,
                         the lessee is responsible for paying expenses up to 2%, <span class="text-success">and all other expenses
-                            beyond that are covered by the insurance company.</span></p>
+                            beyond that are covered by the insurance company.</span>
+                        <br>
+                        <br>
+                        For more information, please contact us: <strong>+905380350762</strong>
+                    </p>
 
-                    <p>For more information, please contact us: <strong>+905380350762</strong></p>
+                    </p>
                 </div>
             </div>
         </section>

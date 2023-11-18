@@ -112,36 +112,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <h1 class="text-center">Signup</h1>
-                    <div class="card">
+                    <h1  data-aos="fade-in" data-aos-delay="100" class="text-center">Signup</h1>
+                    <div data-aos="flip-up" class="card">
                         <div class="card-body">
                             <form action="signup.php" method="post">
                                 <div class="form-row">
                                     <div class="form-group d-flex justify-content-between">
                                         <div class="col-5">
-                                            <label for="name">Name:</label>
-                                            <input type="text" class="form-control" id="name" name="signup-name" required>
+                                            <label data-aos="flip-up" data-aos-delay="100" for="name">Name:</label>
+                                            <input data-aos="flip-up" data-aos-delay="300" type="text" class="form-control" id="name" name="signup-name" required>
                                         </div>
                                         <div class="col-6">
-                                            <label for="surname">Surname:</label>
-                                            <input type="text" class="form-control" id="surname" name="signup-surname" required>
+                                            <label data-aos="flip-up" data-aos-delay="100" for="surname">Surname:</label>
+                                            <input data-aos="flip-up" data-aos-delay="300" type="text" class="form-control" id="surname" name="signup-surname" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mt-3 form-group">
-                                    <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="signup-email" required>
+                                    <label data-aos="flip-up" data-aos-delay="100" for="email">Email:</label>
+                                    <input data-aos="flip-up" data-aos-delay="300" type="email" class="form-control" id="email" name="signup-email" required>
                                 </div>
                                 <div class="mt-3 form-group">
-                                    <label for="password">Password:</label>
-                                    <input type="password" class="form-control" id="password" name="signup-password" required>
+                                    <label data-aos="flip-up" data-aos-delay="100" for="password">Password:</label>
+                                    <input data-aos="flip-up" data-aos-delay="300" type="password" class="form-control" id="password" name="signup-password" required>
                                 </div>
                                 <div class="mt-3 form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="terms" required>
-                                    <label class="form-check-label" for="terms">I agree to the <a href="">terms</a> and <a href="">conditions</a></label>
+                                    <input data-aos="flip-up" data-aos-delay="300" type="checkbox" class="form-check-input" id="terms" required>
+                                    <label data-aos="zoom-up" data-aos-delay="500" class="form-check-label" for="terms">I agree to the <a href="">terms</a> and <a href="">conditions</a></label>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-yellow">Signup</button>
+                                    <button data-aos="flip-up" data-aos-delay="600" type="submit" class="btn btn-yellow">Signup</button>
                                 </div>
                             </form>
                         </div>

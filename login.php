@@ -125,23 +125,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                <h1 class="text-center">Login</h1>
-                    <div class="card">
+                <h1 data-aos="fade-in" data-aos-delay="100" class="text-center">Login</h1>
+                    <div data-aos="flip-up" class="card">
                         <div class="card-body">
                             <form action="login.php" method="post">
                                 <div class="mt-3 form-group">
-                                    <label for="username">E-mail:</label>
-                                    <input type="text" class="form-control" id="email" name="email" required>
+                                    <label data-aos="flip-up" data-aos-delay="100" for="username">E-mail:</label>
+                                    <input data-aos="flip-up" data-aos-delay="300" type="text" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="mt-3 form-group">
-                                    <label for="password">Password:</label>
+                                    <label data-aos="flip-up" data-aos-delay="100" for="password">Password:</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="password" name="password" required>
+                                        <input data-aos="flip-up" data-aos-delay="300" type="password" class="form-control" id="password" name="password" required>
                                     </div>
                                 </div>
                                 <div class="mt-3 button-group d-flex justify-content-between">
-                                    <a href="forgot-password.php" class="btn btn-yellow">Forgot Password?</a>
-                                    <button type="submit" class="btn btn-yellow">Login</button>
+                                    <a data-aos="flip-up" data-aos-delay="100" href="forgot-password.php" class="btn btn-yellow">Forgot Password?</a>
+                                    <button data-aos="flip-up" data-aos-delay="300" type="submit" class="btn btn-yellow">Login</button>
                                 </div>
                             </form>
                         </div>

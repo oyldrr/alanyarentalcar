@@ -51,25 +51,25 @@ $row = $result->fetch_assoc();
     </div>
     <!-- Content of page -->
     <div class="content">
-        <h1 class="mt-5 pt-5">Account Details</h1>
-        <div class="d-block text-center w-25 account-image-container">
+        <h1  data-aos="fade-in" data-aos-delay="100" class="mt-5 pt-5">Account Details</h1>
+        <div data-aos="zoom-in" data-aos-delay="200" class="d-block text-center w-25 account-image-container">
             <a href="upload-photo.php">
                 <img class="ease-in-out opacity-on-hover" width="50%" src="assets/images/account-image.jpg" alt="account-image">
             </a>
-
         </div>
+
         <div class="mb-5 w-50 justify-content-start">
-            <label for="name"><b>Name: </b></label>
-            <input name="name" class="mb-3 form-control" readonly value="<?= $row['name']              ?>"></input>
+            <label data-aos="flip-up" data-aos-delay="100"  for="name"><b>Name: </b></label>
+            <input data-aos="flip-up" data-aos-delay="300" name="name" class="mb-3 form-control" readonly value="<?= $row['name']              ?>"></input>
 
-            <label for="name"><b>Surname: </b></label>
-            <input name="surname" class="mb-3 form-control" readonly value="<?= $row['surname']        ?>"></input>
+            <label data-aos="flip-up" data-aos-delay="100" for="name"><b>Surname: </b></label>
+            <input data-aos="flip-up" data-aos-delay="300" name="surname" class="mb-3 form-control" readonly value="<?= $row['surname']        ?>"></input>
 
-            <label for="name"><b>Email: </b></label>
-            <input name="email" class="mb-3 form-control" readonly value="<?= $row['email']            ?>"></input>
+            <label data-aos="flip-up" data-aos-delay="100" for="name"><b>Email: </b></label>
+            <input data-aos="flip-up" data-aos-delay="300" name="email" class="mb-3 form-control" readonly value="<?= $row['email']            ?>"></input>
 
-            <label for="name"><b>Registration Date: </b></label>
-            <input name="created_at" class="mb-3 form-control" readonly value="<?= $row['created_at']  ?>"></input>
+            <label data-aos="flip-up" data-aos-delay="100" for="name"><b>Registration Date: </b></label>
+            <input data-aos="flip-up" data-aos-delay="300" name="created_at" class="mb-3 form-control" readonly value="<?= $row['created_at']  ?>"></input>
         </div>
     </div>
 

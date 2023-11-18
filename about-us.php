@@ -37,15 +37,15 @@ require_once "config/connection.php";
     </div>
     <!-- Content of page -->
     <div class="content">
-        <h3><i class="fas fa-info-circle"></i> About Us</h3>
+        <h3 data-aos="flip-up" data-aos-delay="100"><i class="fas fa-info-circle"></i> About Us</h3>
 
-        <p>alanyarentalcar.com is a car rental website operating in Alanya. It collaborates with "Aymon Rent A Car, Transportation, Real Estate, Tourism and Trade Limited Company" and "Kerim Najdawi Car Rental, Automotive, Real Estate Limited Company." Our company, which started its services in 2018, aims to provide easy and fast car rental services to a larger audience through its website from 2024 onwards. Currently, we only offer car delivery services in Alanya, Antalya, Gazipaşa, Manavgat, and Belek.</p>
+        <p data-aos="flip-up" data-aos-delay="200">alanyarentalcar.com is a car rental website operating in Alanya. It collaborates with "Aymon Rent A Car, Transportation, Real Estate, Tourism and Trade Limited Company" and "Kerim Najdawi Car Rental, Automotive, Real Estate Limited Company." Our company, which started its services in 2018, aims to provide easy and fast car rental services to a larger audience through its website from 2024 onwards. Currently, we only offer car delivery services in Alanya, Antalya, Gazipaşa, Manavgat, and Belek.</p>
 
-        <p>For detailed information and inquiries:</p>
+        <p data-aos="flip-up" data-aos-delay="300">For detailed information and inquiries:</p>
 
-        <p><strong>+905380350762</strong></p>
+        <p data-aos="flip-up" data-aos-delay="400"><strong>+905380350762</strong></p>
 
-        <p><a href="mailto:alanyarentalcar@gmail.com">alanyarentalcar@gmail.com</a></p>
+        <p data-aos="flip-up" data-aos-delay="500"><a href="mailto:alanyarentalcar@gmail.com">alanyarentalcar@gmail.com</a></p>
 
     </div>
 

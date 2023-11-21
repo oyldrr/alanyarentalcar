@@ -42,17 +42,17 @@ require_once "config/connection.php";
 
         <div class="language-box-container">
 
-            <div class="language-box" data-aos="fade-up" data-aos-delay="100">
-                <a href="index.php?lang=tr">
-                    <img src="assets/images/languages/Flag_of_Turkey.svg.png" alt="turkce">
-                    <h3>Türkçe</h3>
-                </a>
-            </div>
-
             <div class="language-box" data-aos="fade-up" data-aos-delay="200">
                 <a href="index.php?lang=en">
                     <img src="assets/images/languages/uk.png" alt="english">
                     <h3>English</h3>
+                </a>
+            </div>
+
+            <div class="language-box" data-aos="fade-up" data-aos-delay="100">
+                <a href="index.php?lang=tr">
+                    <img src="assets/images/languages/Flag_of_Turkey.svg.png" alt="turkce">
+                    <h3>Türkçe</h3>
                 </a>
             </div>
 

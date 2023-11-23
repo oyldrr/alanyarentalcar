@@ -37,9 +37,13 @@ Color Palette
 .logo-container a img {
     padding: 0;
     margin: 0;
-    margin-top: -.5rem;
-    width: 10rem;
-    max-width: 200px;
+    width: 4rem;
+    filter: drop-shadow(0 0 0.1rem rgb(255, 255, 255));
+    transition: all ease-in-out .3s;
+}
+
+.logo-container a img:hover {
+    filter: drop-shadow(0 0 0.75rem rgb(255, 255, 255));
 }
 
 .header-container {
@@ -50,7 +54,8 @@ Color Palette
     top: 0;
     z-index: 1001;
     width: 100%;
-    padding: 1rem;
+    padding: .75rem;
+    align-items: center;
 }
 
 /* Footer */
@@ -234,3 +239,5 @@ Color Palette
     text-align: center;
     margin-top: 1rem;
 }
+
+/* Rent Page */

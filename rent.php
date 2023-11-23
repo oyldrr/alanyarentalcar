@@ -65,7 +65,7 @@ require_once "config/connection.php";
                     <p>or similar</p>
                 </div>
 
-                <div class="card-col justify-content-start">
+                <div class="card-col">
                     <div class="gear">
                         <i class="fas fa-gear"></i>
                         <span>Gear</span>
@@ -83,7 +83,7 @@ require_once "config/connection.php";
                 </div>
 
                 <div class="card-col">
-                    
+
                 </div>
 
             </div>

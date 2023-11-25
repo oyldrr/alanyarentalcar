@@ -55,23 +55,23 @@ require_once "config/connection.php";
         </div>
 
         <div class="cars-container w-75 m-5">
-            <div class="car-card border p-3 rounded d-flex justify-content-between">
+            <div class="car-card border p-3 rounded d-flex">
 
-                <div class="card-col">
-                    <div class="car-image w-25">
+                <div class="card-col w-25 me-3">
+                    <div class="car-image w-100">
                         <img width="100%" class="rounded" src="assets/images/cars/placeholder.jpg" alt="">
                     </div>
                     <h5 class="text-uppercase pt-3">car model</h5>
                     <p>or similar</p>
                 </div>
 
-                <div class="card-col">
-                    <div class="gear">
+                <div class="card-col w-25">
+                    <div class="gear mt-2 mb-4">
                         <i class="fas fa-gear"></i>
                         <span>Gear</span>
                     </div>
 
-                    <div class="fuel">
+                    <div class="fuel mb-4">
                         <i class="fas fa-gas-pump"></i>
                         <span>Fuel</span>
                     </div>
@@ -83,7 +83,22 @@ require_once "config/connection.php";
                 </div>
 
                 <div class="card-col">
+                    <p class="deposit">
+                        <b>Deposit:</b>
+                        <span id="deposit-price">10</span>
+                        <span id="cuurency">$</span>
+                    </p>
 
+                    <p class="total-distance">
+                        <b>Total mileage limit:</b>
+                        <span id="distance-value">1000</span>
+                        <span id="unit">km</span>
+                    </p>
+
+                    <p class="pickup-location">
+                        <b>Pickup location:</b>
+                        <span id="pickup-location">Airport</span>
+                    </p>
                 </div>
 
             </div>

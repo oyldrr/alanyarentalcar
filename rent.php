@@ -55,9 +55,9 @@ require_once "config/connection.php";
         </div>
 
         <div class="cars-container w-75 m-5">
-            <div class="car-card border p-3 rounded d-flex">
+            <div class="car-card border mb-3 p-3 rounded d-flex">
 
-                <div class="card-col w-25 me-3">
+                <div class="card-col w-50 me-3">
                     <div class="car-image w-100">
                         <img width="100%" class="rounded" src="assets/images/cars/placeholder.jpg" alt="">
                     </div>
@@ -82,26 +82,47 @@ require_once "config/connection.php";
                     </div>
                 </div>
 
-                <div class="card-col">
-                    <p class="deposit">
+                <div class="card-col w-100 text-center">
+                    <p class="deposit mb-4 py-1">
+                        <i class="fas fa-money-bill"></i>
                         <b>Deposit:</b>
                         <span id="deposit-price">10</span>
                         <span id="cuurency">$</span>
                     </p>
 
-                    <p class="total-distance">
+                    <p class="total-distance mb-4">
+                        <i class="fas fa-road"></i>
                         <b>Total mileage limit:</b>
                         <span id="distance-value">1000</span>
                         <span id="unit">km</span>
                     </p>
 
                     <p class="pickup-location">
+                        <i class="fas fa-location"></i>
                         <b>Pickup location:</b>
                         <span id="pickup-location">Airport</span>
                     </p>
                 </div>
 
+                <div class="card-col w-50 text-right">
+                    <img class="agency-img" src="assets/images/agencies/aymon.png" alt="agency-img">
+                    <p>
+                        <!-- Display stars agency points -->
+                        <i class="fa fa-star text-yellow"></i>
+                        <i class="fa fa-star text-yellow"></i>
+                        <i class="fa fa-star text-yellow"></i>
+                        <i class="fa fa-star text-yellow"></i>
+                        <i class="fa fa-star text-yellow"></i>
+                    </p>
+
+                    <a class="text-dark" href="agency-comments.php"><i>comments</i></a>
+
+                    <a class="btn btn-yellow mt-5 w-100" href="car-details.php">Continue</a>
+                </div>
+
             </div>
+
+
         </div>
     </div>
 

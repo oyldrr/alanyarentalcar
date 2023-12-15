@@ -55,7 +55,7 @@ require_once "config/connection.php";
         </div>
 
         <div class="cars-container w-75 m-5">
-            <div class="car-card border mb-3 p-3 rounded d-flex">
+            <div class="car-card border mb-3 p-3 rounded d-flex" data-aos="fade-up" data-aos-delay="100">
 
                 <div class="card-col w-50 me-3">
                     <div class="car-image w-100">
@@ -117,10 +117,11 @@ require_once "config/connection.php";
 
                     <a class="text-dark" href="agency-comments.php"><i>comments</i></a>
 
-                    <a class="btn btn-yellow mt-5 w-100" href="car-details.php">Continue</a>
+                    <a class="btn btn-yellow mt-5 w-100" href="car-details.php">Select</a>
                 </div>
 
             </div>
+            
 
 
         </div>

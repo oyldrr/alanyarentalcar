@@ -39,12 +39,14 @@ require_once "config/connection.php";
     </div>
     <!-- Content of page -->
     <div class="mt-5 content">
-        <a class="mt-5 rent-btn btn btn-secondary mb-5" href="rent.php" data-aos="fade-up">
-            Rent a car!
-            <p>
-                (Please click to rent.)
-            </p>
-        </a>
+        <div class="rent-btn-background">
+            <a class="mt-5 rent-btn btn btn-secondary mb-5" href="rent.php" data-aos="fade-up">
+                Rent a car!
+                <p>
+                    (Please click to rent.)
+                </p>
+            </a>
+        </div>
 
         <section id="insurance" class="mt-5">
             <div class="d-flex">

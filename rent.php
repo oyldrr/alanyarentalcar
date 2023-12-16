@@ -117,7 +117,7 @@ require_once "config/connection.php";
 
                     <a class="text-dark" href="agency-comments.php"><i>comments</i></a>
 
-                    <a class="btn btn-yellow mt-5 w-100" href="car-details.php">Select</a>
+                    <a class="btn btn-yellow mt-5 w-100" href="details.php">Select</a>
                 </div>
 
             </div>

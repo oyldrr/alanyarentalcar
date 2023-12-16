@@ -102,6 +102,13 @@ require_once "config/connection.php";
                         <b>Pickup location:</b>
                         <span id="pickup-location">Airport</span>
                     </p>
+
+                    
+                    <div class="d-flex justify-content-end mt-4 me-5">
+                        <span class="h1">100</span>
+                        .00
+                        <span class="currency">$</span>
+                    </div>
                 </div>
 
                 <div class="card-col w-50 text-right">
@@ -121,7 +128,7 @@ require_once "config/connection.php";
                 </div>
 
             </div>
-            
+
 
 
         </div>

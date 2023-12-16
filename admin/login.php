@@ -96,9 +96,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Administration panel of QuakeFocus" />
+    <meta name="description" content="Administration panel of Alanya Rental Car" />
     <meta name="author" content="" />
-    <title>Login - QuakeFocus Admin</title>
+    <title>Login - Alanya Rental Car Admin</title>
     <link href="css/styles.css" rel="stylesheet" />
 
     <!-- Favicon -->
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="bg-primary">
+<body class="bg-dark">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
@@ -141,8 +141,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <label for="inputPassword">Password</label>
                                         </div>
 
-                                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <input type="submit" class="btn btn-primary" value="Login">
+                                        <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
+                                            <input type="submit" class="btn btn-dark w-100" value="Login">
                                             </div>
                                     </form>
                                 </div>
@@ -156,8 +156,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">
-                            Copyright &copy; QuakeFocus
+                        <div class="text-muted mx-auto">
+                            Copyright &copy; Alanya Rental Car
                             <!-- Getting Current Year -->
                             <script>
                                 document.write(new Date().getFullYear())

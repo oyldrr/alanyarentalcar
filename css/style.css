@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-.ease-in-out{
+.ease-in-out {
     transition: all ease-in-out .3s;
 }
 
@@ -15,6 +15,22 @@
 
 .text-yellow {
     color: #fab710;
+}
+
+.list-type-none {
+    list-style-type: none;
+}
+
+.corner-left {
+    border-radius: 15px 0px 0px 15px;
+}
+
+.corner-mid {
+    border-radius: 15px;
+}
+
+.corner-right {
+    border-radius: 0px 15px 15px 0px;
 }
 
 /*
@@ -150,7 +166,7 @@ Color Palette
 /* Index Page - Content/rent a car button */
 .rent-btn {
     background-color: #fab710;
-    
+
     border: none;
 
     display: flex;
@@ -214,7 +230,7 @@ Color Palette
 
 /* Languages Page */
 
-.language-box-container{
+.language-box-container {
 
     display: flex;
     flex-wrap: wrap;
@@ -246,7 +262,7 @@ Color Palette
     height: 7rem;
     border-radius: 15px;
     border: 1px solid #313332;
-} 
+}
 
 .language-box h3 {
     text-align: center;
@@ -254,14 +270,16 @@ Color Palette
 }
 
 /* Rent Page */
-.agency-img{
+.agency-img {
     width: 50%;
     margin-top: -1rem;
     margin-left: .5rem;
     margin-bottom: -1rem;
 }
 
-#page-number, #filter, #order {
+#page-number,
+#filter,
+#order {
     width: fit-content;
     cursor: pointer;
 }
@@ -274,6 +292,41 @@ Color Palette
     margin-top: 3rem;
 }
 
+.price-container {
+    background-color: #313332;
+    color: #ffffff;
+    margin: auto;
+    width: fit-content;
+    border-radius: 5px;
+
+    -webkit-box-shadow: 2px 7px 24px -6px rgba(68, 68, 68, 1);
+    -moz-box-shadow: 2px 7px 24px -6px rgba(68, 68, 68, 1);
+    box-shadow: 2px 7px 24px -6px rgba(68, 68, 68, 1);
+
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.price-container p {
+    padding: .5em 2em;
+}
+
+.amount {
+    font-size: x-large;
+}
+
+.details-box {
+    background-color: #fab81067;
+    -webkit-box-shadow: 8px 8px 24px -14px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 8px 8px 24px -14px rgba(66, 68, 90, 1);
+    box-shadow: 8px 8px 24px -14px rgba(66, 68, 90, 1);
+    padding: 1em 3em;
+
+    color: #313332;
+}
+
 .detail-agency-card {
     background-color: #3133321d;
     border-radius: 15px;
@@ -284,8 +337,72 @@ Color Palette
 }
 
 .next-btn-container {
+    margin-top: 3rem;
     margin-bottom: 3rem;
     width: 100%;
     display: flex;
     justify-content: right;
 }
+
+/* Extras Page */
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    margin-bottom: 3rem;
+  }
+  
+  .checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  
+  .checkbox-container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  .checkbox-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }

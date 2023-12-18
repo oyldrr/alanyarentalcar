@@ -50,29 +50,53 @@ require_once "config/connection.php";
             <p class="text-center mb-5">Please select the extras you want.</p>
 
             <form class="w-50 mx-auto">
-                <label class="checkbox-container">Lorem ipsum, dolor sit amet consectetur.
+                <label class="checkbox-container">
+                    <p class="d-flex flex-column">
+                        Unlimited Kilometers - 20$
+                        <span class="checkbox-desc">
+                            > Enjoy the freedom to explore without worrying about mileage limits during your rental.
+                        </span>
+                    </p>
                     <input type="checkbox">
                     <span class="checkmark"></span>
                 </label>
 
-                <label class="checkbox-container">Lorem, ipsum dolor sit amet consectetur.
+                <label class="checkbox-container">
+                    <p class="d-flex flex-column">
+                        Infant Car Seat - 5$
+                        <span class="checkbox-desc">
+                            > Ensure the safety of your little one with a comfortable and secure infant car seat.
+                        </span>
+                    </p>
                     <input type="checkbox">
                     <span class="checkmark"></span>
                 </label>
 
-                <label class="checkbox-container">Lorem ipsum dolor sit amet, consectetur.
+                <label class="checkbox-container">
+                    <p class="d-flex flex-column">
+                        Under 25 Surcharge - 15$
+                        <span class="checkbox-desc">
+                            > An additional fee for renters under 25 years old, reflecting potential higher risk associated with younger drivers.
+                        </span>
+                    </p>
                     <input type="checkbox">
                     <span class="checkmark"></span>
                 </label>
 
-                <label class="checkbox-container">Lorem ipsum dolor, sit amet consectetur.
+                <label class="checkbox-container">
+                    <p class="d-flex flex-column">
+                        Additional Drivers - 7$
+                        <span class="checkbox-desc">
+                            > Share the driving responsibilities by adding extra drivers to the rental agreement.
+                        </span>
+                    </p>
                     <input type="checkbox">
                     <span class="checkmark"></span>
                 </label>
             </form>
 
             <div class="next-btn-container">
-                <a href="pickup-date.php" class="btn btn-yellow">Next</a>
+                <a href="select-dates.php" class="btn btn-yellow">Next</a>
             </div>
 
             <div class="detail-agency-card">

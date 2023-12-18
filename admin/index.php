@@ -21,7 +21,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - Quakefocus Admin</title>
+    <title>Dashboard - Alanya Rental Car Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     
@@ -80,10 +80,10 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-success text-white mb-4">
-                            <div class="card-body">Total Post</div>
+                            <div class="card-body">Total Agencies</div>
                             <?php
-                            // Getting total user data
-                            $stmt = $conn->prepare("SELECT count(*) as total FROM posts");
+                            // Getting total agency data
+                            $stmt = $conn->prepare("SELECT count(*) as total FROM agencies");
                             $stmt->execute();
                             $result = $stmt->get_result();
                             $row = $result->fetch_assoc();
@@ -96,10 +96,10 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">Total Supporter</div>
+                            <div class="card-body">Total Cars</div>
                             <?php
                             // Getting total user data
-                            $stmt = $conn->prepare("SELECT count(*) as total FROM supporters");
+                            $stmt = $conn->prepare("SELECT count(*) as total FROM cars");
                             $stmt->execute();
                             $result = $stmt->get_result();
                             $row = $result->fetch_assoc();
@@ -143,22 +143,20 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Fullname</th>
-                                    <th>Birthdate</th>
+                                    <th>Email</th>
+                                    <th>Name</th>
+                                    <th>Surname</th>
                                     <th>Country</th>
-                                    <th>Rank</th>
-                                    <th>Type</th>
                                     <th>Created At</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Fullname</th>
-                                    <th>Birthdate</th>
+                                    <th>Email</th>
+                                    <th>Name</th>
+                                    <th>Surname</th>
                                     <th>Country</th>
-                                    <th>Rank</th>
-                                    <th>Type</th>
                                     <th>Created At</th>
                                 </tr>
                             </tfoot>
@@ -173,11 +171,10 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                                 ?>
                                     <tr>
                                         <td><?= $row['id'] ?></td>
-                                        <td><?= $row['fullname'] ?></td>
-                                        <td><?= $row['birthdate'] ?></td>
+                                        <td><?= $row['email'] ?></td>
+                                        <td><?= $row['name'] ?></td>
+                                        <td><?= $row['surname'] ?></td>
                                         <td><?= $row['country'] ?></td>
-                                        <td><?= $row['rank'] ?></td>
-                                        <td><?= $row['type'] ?></td>
                                         <td><?= $row['created_at'] ?></td>
                                     </tr>
 
@@ -193,7 +190,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; QuakeFocus</div>
+                    <div class="text-muted">Copyright &copy; Alanya Rental Car</div>
                 </div>
             </div>
         </footer>
@@ -335,7 +332,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 
         // Create an array with month names
         $months = [
-            'October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
+            'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September'
         ];
 
@@ -362,7 +359,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
         $monthlyVisitsJSON = json_encode($monthlyVisits);
 
         // Generate month labels
-        $monthLabels = array('October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
+        $monthLabels = array('November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September');
 
         //for ($i = 0; $i < 12; $i++) {

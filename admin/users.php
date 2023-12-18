@@ -21,7 +21,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Users - Quakefocus Admin</title>
+    <title>Users - Alanya Rental Car Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
 
@@ -74,7 +74,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                             <i class="fas fa-users me-1"></i>
                             User Records
                         </div>
-                        <a class="btn btn-primary " href="insert.php?table=users">Create new <i class="fas fa-plus-circle"></i></a>
+                        <a class="btn btn-dark " href="insert.php?table=users">Create new <i class="fas fa-plus-circle"></i></a>
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple">
@@ -82,17 +82,17 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                                 <tr>
                                     <th></th>
                                     <th>#</th>
-                                    <th>Username</th>
+                                    <th>Email</th>
                                     <th>Password</th>
-                                    <th>Fullname</th>
+                                    <th>Name</th>
+                                    <th>Surname</th>
                                     <th>Birthdate</th>
                                     <th>Country</th>
                                     <th>Province</th>
                                     <th>City</th>
                                     <th>Phone</th>
                                     <th>Address</th>
-                                    <th>Image Path</th>
-                                    <th>Rank</th>
+                                    <th>Image Path</th>                      
                                     <th>Type</th>
                                     <th>Active</th>
                                     <th>Updated At</th>
@@ -103,9 +103,10 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                                 <tr>
                                     <th></th>
                                     <th>#</th>
-                                    <th>Username</th>
+                                    <th>Email</th>
                                     <th>Password</th>
-                                    <th>Fullname</th>
+                                    <th>Name</th>
+                                    <th>Surname</th>
                                     <th>Birthdate</th>
                                     <th>Country</th>
                                     <th>Province</th>
@@ -113,7 +114,6 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                                     <th>Phone</th>
                                     <th>Address</th>
                                     <th>Image Path</th>
-                                    <th>Rank</th>
                                     <th>Type</th>
                                     <th>Active</th>
                                     <th>Updated At</th>
@@ -131,15 +131,16 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                                 ?>
                                     <tr>
                                         <td>
-                                            <a class="btn btn-link" href="update.php?table=users&id=<?= $row['id'] ?>">
+                                            <a class="btn btn-link text-dark" href="update.php?table=users&id=<?= $row['id'] ?>">
                                                 <i class="fas fa-cog">
                                                 </i>
                                             </a>
                                         </td>
                                         <td><?= $row['id'] ?></td>
-                                        <td><?= $row['uname'] ?></td>
+                                        <td><?= $row['email'] ?></td>
                                         <td><?= $row['pwd'] ?></td>
-                                        <td><?= $row['fullname'] ?></td>
+                                        <td><?= $row['name'] ?></td>
+                                        <td><?= $row['surname'] ?></td>
                                         <td><?= $row['birthdate'] ?></td>
                                         <td><?= $row['country'] ?></td>
                                         <td><?= $row['province'] ?></td>
@@ -147,7 +148,6 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                                         <td><?= $row['phone'] ?></td>
                                         <td><?= $row['address'] ?></td>
                                         <td><?= $row['user_img'] ?></td>
-                                        <td><?= $row['rank'] ?></td>
                                         <td><?= $row['type'] ?></td>
                                         <td><?= $row['active'] ?></td>
                                         <td><?= $row['updated_at'] ?></td>
@@ -166,7 +166,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; QuakeFocus</div>
+                    <div class="text-muted">Copyright &copy; Alanya Rental Car</div>
                 </div>
             </div>
         </footer>
@@ -308,7 +308,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 
         // Create an array with month names
         $months = [
-            'October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
+            'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September'
         ];
 
@@ -336,7 +336,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 
         // Generate month labels
         $monthLabels = array(
-            'October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
+            'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September'
         );
 

@@ -15,7 +15,53 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
         $id = $_GET['id'];
 
         if ($_GET['table'] == "users") {
-            $fullname = mysqli_real_escape_string($conn, $_POST['update-name']);
+
+            // Configuration
+            $uploadDirectory = '../assets/images/user-images/';
+
+            // Get the uploaded file details
+            $fileName = basename($_FILES['update-image']['name']);
+            $targetPath = $uploadDirectory . $fileName;
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
+
+            // Check if the file is an image
+            $check = getimagesize($_FILES['update-image']['tmp_name']);
+            if ($check !== false) {
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+
+            // Check if the file already exists
+            if (file_exists($targetPath)) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
+
+            // Check file size (you can adjust the size limit)
+            if ($_FILES['update-image']['size'] > 500000) {
+                echo "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
+
+            // Allow certain file formats (you can adjust the allowed formats)
+            if ($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'jpeg' && $imageFileType != 'gif') {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
+
+            if ($uploadOk) {
+                if (move_uploaded_file($_FILES['update-image']['tmp_name'], $targetPath)) {
+                    echo "image uploaded succesfully!";
+                } else {
+                    header('location: users.php?image-couldnt-be-uploaded');
+                }
+            }
+
+            $name = mysqli_real_escape_string($conn, $_POST['update-name']);
+            $surname = mysqli_real_escape_string($conn, $_POST['update-surname']);
             $email = mysqli_real_escape_string($conn, $_POST['update-mail']);
             $pwd = mysqli_real_escape_string($conn, $_POST['update-password']);
             $cpassword = mysqli_real_escape_string($conn, $_POST['update-cpassword']);
@@ -26,26 +72,25 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
             $phone = mysqli_real_escape_string($conn, $_POST['update-phone']);
             $address = mysqli_real_escape_string($conn, $_POST['update-address']);
             $image = mysqli_real_escape_string($conn, $_POST['update-image']);
-            $rank = mysqli_real_escape_string($conn, $_POST['update-rank']);
-            $type = mysqli_real_escape_string($conn, $_POST['update-type']);
             $active = mysqli_real_escape_string($conn, $_POST['update-active']);
 
             $update = "UPDATE `users` SET 
-            `uname` = ?, `pwd` = ?, `fullname` = ?, 
+            `email` = ?, `pwd` = ?, `name` = ?, `surname` = ?,  
             `birthdate` = ?, `country` = ?, `province` = ?, 
-            `city` = ?, `phone`= ?, `address` = ?, `user_img` = ?, 
-            `rank` = ?, `type` = ?, `active` = ?
+            `city` = ?, `phone`= ?, `address` = ?, `user_img` = ?,
+            `active` = ?
             WHERE id = ?";
 
 
             if ($stmt = mysqli_prepare($conn, $update)) {
                 // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "ssssssssssssss", $param_email, $param_password, $param_fullname, $param_birthday, $param_country, $param_province, $param_city, $param_phone, $param_address, $param_image, $param_rank, $param_type, $param_active, $param_id);
+                mysqli_stmt_bind_param($stmt, "sssssssssssss", $param_email, $param_password, $param_name, $param_surname, $param_birthday, $param_country, $param_province, $param_city, $param_phone, $param_address, $param_image, $param_active, $param_id);
 
                 // Set parameters
                 $param_email = $email;
                 $param_password = password_hash($pwd, PASSWORD_DEFAULT); // Creates a password hash
-                $param_fullname = $fullname;
+                $param_name = $name;
+                $param_surname = $surname;
                 $param_birthday = $birthday;
                 $param_country = $country;
                 $param_province = $province;
@@ -53,8 +98,6 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                 $param_phone = $phone;
                 $param_address = $address;
                 $param_image = $image;
-                $param_rank = $rank;
-                $param_type = $type;
                 $param_active = $active;
                 $param_id = $id;
 
@@ -72,36 +115,88 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
             } else {
                 header('location: users.php?mysqliproblem');
             }
-        } elseif ($_GET['table'] == "supporters") {
-            $name = mysqli_real_escape_string($conn, $_POST['update-name']);
-            $message = mysqli_real_escape_string($conn, $_POST['update-message']);
-            $amount = mysqli_real_escape_string($conn, $_POST['update-amount']);
-            $image = mysqli_real_escape_string($conn, $_POST['update-image']);
-            $active = mysqli_real_escape_string($conn, $_POST['update-active']);
-            $tag = mysqli_real_escape_string($conn, $_POST['update-tag']);
+        } elseif ($_GET['table'] == "cars") {
 
-            $update = "UPDATE `supporters` SET 
-            `name` = ?, `message` = ?, `amount` = ?, `image` = ?, `active` = ?, `tag` = ?
+            // Configuration
+            $uploadDirectory = '../assets/images/cars/';
+
+            // Get the uploaded file details
+            $fileName = basename($_FILES['update-car-image']['name']);
+            $targetPath = $uploadDirectory . $fileName;
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
+
+            // Check if the file is an image
+            $check = getimagesize($_FILES['update-car-image']['tmp_name']);
+            if ($check !== false) {
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+
+            // Check if the file already exists
+            if (file_exists($targetPath)) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
+
+            // Check file size (you can adjust the size limit)
+            if ($_FILES['update-car-image']['size'] > 50000000) {
+                echo "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
+
+            // Allow certain file formats (you can adjust the allowed formats)
+            if ($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'jpeg' && $imageFileType != 'gif') {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
+
+            if ($uploadOk) {
+                if (move_uploaded_file($_FILES['update-car-image']['tmp_name'], $targetPath)) {
+                    echo "image uploaded succesfully!";
+                } else {
+                    header('location: users.php?image-couldnt-be-uploaded');
+                }
+            }
+
+            $image = $fileName;
+            $model = mysqli_real_escape_string($conn, $_POST['update-model']);
+            $gear = mysqli_real_escape_string($conn, $_POST['update-gear']);
+            $fuel = mysqli_real_escape_string($conn, $_POST['update-fuel']);
+            $class = mysqli_real_escape_string($conn, $_POST['update-class']);
+            $year = mysqli_real_escape_string($conn, $_POST['update-year']);
+            $km = mysqli_real_escape_string($conn, $_POST['update-km']);
+            $color = mysqli_real_escape_string($conn, $_POST['update-color']);
+            $active = mysqli_real_escape_string($conn, $_POST['update-active']);
+
+            $update = "UPDATE `cars` SET 
+            `image` = ?, `model` = ?, `gear` = ?, `fuel` = ?,  
+            `class` = ?, `year` = ?, `km` = ?, 
+            `color` = ?, `active` = ?
             WHERE id = ?";
 
 
             if ($stmt = mysqli_prepare($conn, $update)) {
                 // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "sssssss", $param_name, $param_message, $param_amount, $param_image, $param_active, $param_tag, $param_id);
+                mysqli_stmt_bind_param($stmt, "sssssssss", $param_image, $param_model, $param_gear, $param_fuel, $param_class, $param_year, $param_km, $param_color, $param_active);
 
                 // Set parameters
-                $param_name = $name;
-                $param_message = $message;
-                $param_amount = $amount;
                 $param_image = $image;
+                $param_model = $model;
+                $param_gear = $gear;
+                $param_fuel = $fuel;
+                $param_class = $class;
+                $param_year = $year;
+                $param_km = $km;
+                $param_color = $color;
                 $param_active = $active;
-                $param_tag = $tag;
-                $param_id = $id;
 
                 // Attempt to execute the prepared statement
                 if (mysqli_stmt_execute($stmt)) {
                     // Redirect to login page
-                    header('location: supporters.php?update=successfull');
+                    header('location: cars.php?update=successfull');
                     exit();
                 } else {
                     echo "Oops! Something went wrong. Please try again later.";
@@ -110,77 +205,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                 // Close statement
                 mysqli_stmt_close($stmt);
             } else {
-                header('location: supporters.php?mysqliproblem');
-            }
-        } elseif ($_GET['table'] == "supply") {
-            $water = mysqli_real_escape_string($conn, $_POST['update-water']);
-            $food = mysqli_real_escape_string($conn, $_POST['update-food']);
-            $education = mysqli_real_escape_string($conn, $_POST['update-education']);
-            $shelter = mysqli_real_escape_string($conn, $_POST['update-shelter']);
-            $entered_by = mysqli_real_escape_string($conn, $_POST['update-entered_by']);
-
-            $update = "UPDATE `supply` SET 
-            `water` = ?, `food` = ?, `education` = ?, `shelter` = ?, `entered_by` = ?
-            WHERE id = ?";
-
-
-            if ($stmt = mysqli_prepare($conn, $update)) {
-                // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "ssssss", $param_water, $param_food, $param_education, $param_shelter, $param_entered_by, $param_id);
-
-                // Set parameters
-                $param_water = $water;
-                $param_food = $food;
-                $param_education = $education;
-                $param_shelter = $shelter;
-                $param_entered_by = $entered_by;
-                $param_id = $id;
-
-                // Attempt to execute the prepared statement
-                if (mysqli_stmt_execute($stmt)) {
-                    // Redirect to login page
-                    header('location: supply.php?update=successfull');
-                    exit();
-                } else {
-                    echo "Oops! Something went wrong. Please try again later.";
-                }
-
-                // Close statement
-                mysqli_stmt_close($stmt);
-            } else {
-                header('location: supply.php?mysqliproblem');
-            }
-        } elseif ($_GET['table'] == "newsletter") {
-            $email = mysqli_real_escape_string($conn, $_POST['update-email']);
-            $active = mysqli_real_escape_string($conn, $_POST['update-active']);
-
-            $update = "UPDATE `newsletter` SET 
-            `email` = ?, `active` = ?
-            WHERE id = ?";
-
-
-            if ($stmt = mysqli_prepare($conn, $update)) {
-                // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "sss", $param_email, $param_active, $param_id);
-
-                // Set parameters
-                $param_email = $email;
-                $param_active = $active;
-                $param_id = $id;
-
-                // Attempt to execute the prepared statement
-                if (mysqli_stmt_execute($stmt)) {
-                    // Redirect to login page
-                    header('location: newsletter.php?update=successfull');
-                    exit();
-                } else {
-                    echo "Oops! Something went wrong. Please try again later.";
-                }
-
-                // Close statement
-                mysqli_stmt_close($stmt);
-            } else {
-                header('location: newsletter.php?mysqliproblem');
+                header('location: cars.php?mysqliproblem');
             }
         }
     }
@@ -218,7 +243,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
     <div id="layoutSidenav_content">
         <main>
             <div class="content py-5 d-flex justify-content-center">
-                <form action="" method="POST" class="w-50 text-light">
+                <form action="" method="POST" enctype="multipart/form-data" class="w-50 text-light">
                     <?php
                     $id = $_GET['id'];
 
@@ -229,12 +254,13 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                         $result = $stmt->get_result();
                         $row = $result->fetch_assoc();
 
-                            echo "
+                        echo "
                         <!-- Name input -->
                         <h5 class='text-dark'>Personal Info (Required)</h5>
                         <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Full name' name='update-name' type='text' value='" . $row['fullname'] . "'>
-                            <input required class='form-control' placeholder='E-mail' name='update-mail' id='mail' type='email' value='" . $row['uname'] . "'>
+                            <input required class='form-control me-1' placeholder='Name' name='update-name' type='text' value='" . $row['name'] . "'>
+                            <input required class='form-control me-1' placeholder='Surname' name='update-surname' type='text' value='" . $row['surname'] . "'>
+                            <input required class='form-control' placeholder='E-mail' name='update-mail' id='mail' type='email' value='" . $row['email'] . "'>
                         </div>
 
                         <!-- Password input -->
@@ -272,8 +298,6 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                         <!-- Only Admins -->
                         <h5 class='text-dark'>Only Admins (Optional)</h5>
                         <div class='form-outline mb-4'>
-                            <input class='form-control me-1' placeholder='Rank' name='update-rank' type='text' value='" . $row['rank'] . "'>
-                            <input class='form-control' placeholder='Type' name='update-type' type='text' value='" . $row['type'] . "'>
                             <input class='form-control' placeholder='Active' name='update-active' type='text' value='" . $row['active'] . "'>
                         </div>
                         <div class='row mb-4'>
@@ -282,127 +306,78 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                                 <input type='submit' class='btn btn-primary mb-4 w-100' value='Update the record'>
                             </div>
                         </div>";
-                    } elseif ($_GET['table'] == "supporters") {
-                        $stmt = $conn->prepare('SELECT * FROM supporters WHERE id = ' . $id);
+                    } elseif ($_GET['table'] == "cars") {
+
+                        $stmt = $conn->prepare('SELECT * FROM cars WHERE id = ' . $id);
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $row = $result->fetch_assoc();
 
-                            echo "
-                        <!-- Name input -->
-                        <h5 class='text-dark'>Name</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Full name' name='update-name' type='text' value='" . $row['name'] . "'>
-                        </div>
+                        echo "
+                        <!-- Image -->
+							<h5 class='text-dark'>Image</h5>
+							<div class='form-outline mb-4'>
+								<input class='form-control me-1' placeholder='Image' name='update-car-image' type='file' value='" . $row['image'] . "''>
+							</div>
+							
+							<!-- Model input -->
+							<h5 class='text-dark'>Car Information</h5>
+							<div class='form-outline mb-4'>
+								<input class='form-control me-1 mb-3' placeholder='Model' name='update-model' type='text' value='" . $row['model'] . "'>
+								<select class='form-control me-1 mb-3' placeholder='Gear' name='update-gear'>
+									<option value='' disabled selected>" . $row['gear'] . "</option>
+									<option value='Manual'>Manual Transmission</option>
+									<option value='Automatic'>Automatic Transmission</option>
+									<option value='Semi-Automatic'>Semi-Automatic Transmission</option>
+									<option value='Continuous Variable'>Continuous Variable Transmission</option>
+									<option value='Dual-Clutch'>Dual-Clutch Transmission</option>
+									<option value='Automated Manual'>Automated Manual Transmission</option>
+								</select>
+								<select class='form-control me-1 mb-3' placeholder='Fuel' name='update-fuel' type='text'>
+									<option value='' disabled selected>" . $row['fuel'] . "</option>
+									<option value='Gasoline'>Gasoline</option>
+									<option value='Diesel'>Diesel</option>
+									<option value='LPG'>LPG (Liquid Petroleum Gas)</option>
+									<option value='Electricity'>Electricity</option>
+								</select>
 
-                        <!-- Message input -->
-                        <h5 class='text-dark'>Message</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Message' name='update-message' type='text' value='" . $row['message'] . "'>
-                        </div>
+								<select class='form-control me-1 mb-3' placeholder='Class' name='update-class' type='text'>
+									<option value='' disabled selected>" . $row['class'] . "</option>
+									<option value='Sedan'>Sedan</option>
+									<option value='Hatchback'>Hatchback</option>
+									<option value='SUV'>SUV (Sport Utility Vehicle)</option>
+									<option value='Coupe'>Coupe</option>
+									<option value='Cabriolet'>Cabriolet</option>
+									<option value='Minivan'>Minivan</option>
+								</select>
 
-                        <!-- Amount input -->
-                        <h5 class='text-dark'>Amount</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Amount' name='update-amount' type='text' value='" . $row['amount'] . "'>
-                        </div>
+								<input class='form-control me-1 mb-3' placeholder='Year' name='update-year' type='text' value='" . $row['year'] . "'>
+								<input class='form-control me-1 mb-3' placeholder='KM' name='update-km' type='text' value='" . $row['km'] . "'>
+								
+								<select class='form-control me-1 mb-3' placeholder='Color' name='update-color' type='text'>
+									<option value='' disabled selected>" . $row['color'] . "</option>
+									<option value='White'>White</option>
+									<option value='Black'>Black</option>
+									<option value='Silver/Gray'>Silver/Gray</option>
+									<option value='Blue'>Blue</option>
+									<option value='Red'>Red</option>
+									<option value='Yellow'>Yellow</option>
+									<option value='Other'>Other</option>
+								</select>
+							</div>
 
-                        <!-- Image input -->
-                        <h5 class='text-dark'>Image</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Image' name='update-image' type='text' value='" . $row['image'] . "'>
-                        </div>
-
-                        <!-- Active input -->
-                        <h5 class='text-dark'>Active</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Active' name='update-active' type='text' value='" . $row['active'] . "'>
-                        </div>
-
-                        <!-- Tag input -->
-                        <h5 class='text-dark'>Tag</h5>
-                        <div class='form-outline mb-4'>
-                            <select required class='form-control me-1' name='insert-tag'>
-								<option value='firm'>Firm</option>
-								<option value='voluntarily'>Voluntarily</option>
-								<option value='financially'>Financially</option>
-							</select>
-                        </div>
-
-                        <div class='row mb-4'>
-                            <div class='col'>
-                                <!-- Submit button -->
-                                <input type='submit' class='btn btn-primary mb-4 w-100' value='Update the record'>
-                            </div>
-                        </div>";
-                    } elseif ($_GET['table'] == "supply") {
-                        $stmt = $conn->prepare('SELECT * FROM supply WHERE id = ' . $id);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        $row = $result->fetch_assoc();
-
-                            echo "
-                        <!-- Water input -->
-                        <h5 class='text-dark'>Water</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='water' name='update-water' type='text' value='" . $row['water'] . "'>
-                        </div>
-
-                        <!-- Food input -->
-                        <h5 class='text-dark'>Food</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Food' name='update-food' type='text' value='" . $row['food'] . "'>
-                        </div>
-
-                        <!-- Education input -->
-                        <h5 class='text-dark'>Education</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Education' name='update-education' type='text' value='" . $row['education'] . "'>
-                        </div>
-
-                        <!-- Shelter input -->
-                        <h5 class='text-dark'>Shelter</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Shelter' name='update-shelter' type='text' value='" . $row['shelter'] . "'>
-                        </div>
-
-                        <!-- Entered By input -->
-                        <h5 class='text-dark'>Entered By</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Entered By' name='update-entered_by' type='text' value='" . $row['entered_by'] . "'>
-                        </div>
-
-                        <div class='row mb-4'>
-                            <div class='col'>
-                                <!-- Submit button -->
-                                <input type='submit' class='btn btn-primary mb-4 w-100' value='Update the record'>
-                            </div>
-                        </div>";
-                    } elseif ($_GET['table'] == "newsletter") {
-                        $stmt = $conn->prepare('SELECT * FROM newsletter WHERE id = ' . $id);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        $row = $result->fetch_assoc();
-
-                            echo "
-                        <!-- Email input -->
-                        <h5 class='text-dark'>Email</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Email' name='update-email' type='text' value='" . $row['email'] . "'>
-                        </div>
-
-                        <!-- Active input -->
-                        <h5 class='text-dark'>Active</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Active' name='update-active' type='text' value='" . $row['active'] . "'>
-                        </div>
-
-                        <div class='row mb-4'>
-                            <div class='col'>
-                                <!-- Submit button -->
-                                <input type='submit' class='btn btn-primary mb-4 w-100' value='Update the record'>
-                            </div>
-                        </div>";
+							<!-- Important -->
+							<h5 class='text-dark'>Important</h5>
+							<div class='form-outline mb-4'>
+								<input class='form-control' placeholder='Active' name='update-active' type='text' value='" . $row['active'] . "'>
+							</div>
+							<!-- 2 column grid layout for inline styling -->
+							<div class='row mb-4'>
+								<div class='col'>
+									<!-- Submit button -->
+									<input type='submit' class='btn btn-primary mb-4 w-100' value='update the record'>
+								</div>
+							</div>";
                     } else {
                         include_once '404.html';
                     }

@@ -33,6 +33,10 @@
     border-radius: 0px 15px 15px 0px;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 /*
 
 Color Palette
@@ -84,6 +88,15 @@ Color Palette
     bottom: 0;
     z-index: 1000;
     width: 100%;
+}
+
+.footer-links {
+    color: #313332;
+    transition: all ease-in-out .3s;
+}
+
+.footer-links:hover {
+    color: #006ac1;
 }
 
 /* Footer copyright */
@@ -284,6 +297,12 @@ Color Palette
     cursor: pointer;
 }
 
+.gear span,
+.fuel span,
+.class span{
+    font-size: .75em;
+}
+
 /* Car Details Page */
 .back-btn-container {
     width: 88%;
@@ -318,7 +337,7 @@ Color Palette
 }
 
 .details-box {
-    background-color: #fab81067;
+    background-color: #fff;
     -webkit-box-shadow: 8px 8px 24px -14px rgba(66, 68, 90, 1);
     -moz-box-shadow: 8px 8px 24px -14px rgba(66, 68, 90, 1);
     box-shadow: 8px 8px 24px -14px rgba(66, 68, 90, 1);
@@ -356,46 +375,50 @@ Color Palette
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
+
     margin-bottom: 3rem;
-  }
-  
-  .checkbox-container input {
+}
+
+.checkbox-container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-  }
-  
-  .checkmark {
+}
+
+.checkbox-desc {
+    font-size: .5em;
+}
+
+.checkmark {
     position: absolute;
     top: 0;
     left: 0;
     height: 25px;
     width: 25px;
     background-color: #eee;
-  }
-  
-  .checkbox-container:hover input ~ .checkmark {
+}
+
+.checkbox-container:hover input~.checkmark {
     background-color: #ccc;
-  }
-  
-  .checkbox-container input:checked ~ .checkmark {
+}
+
+.checkbox-container input:checked~.checkmark {
     background-color: #2196F3;
-  }
-  
-  .checkmark:after {
+}
+
+.checkmark:after {
     content: "";
     position: absolute;
     display: none;
-  }
-  
-  .checkbox-container input:checked ~ .checkmark:after {
+}
+
+.checkbox-container input:checked~.checkmark:after {
     display: block;
-  }
-  
-  .checkbox-container .checkmark:after {
+}
+
+.checkbox-container .checkmark:after {
     left: 9px;
     top: 5px;
     width: 5px;
@@ -405,4 +428,128 @@ Color Palette
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
+}
+
+/* Pickup Date Page */
+.calendar-container {
+    border-radius: 15px;
+
+    -webkit-box-shadow: 1px 1px 12px 0px rgba(66, 68, 90, 0.268);
+    -moz-box-shadow: 1px 1px 12px 0px rgba(66, 68, 90, 0.268);
+    box-shadow: 1px 1px 12px 0px rgba(66, 68, 90, 0.268);
+}
+
+.calendar-month,
+.calendar-year {
+    cursor: pointer;
+    color: #fab710;
+    transition: all ease-in-out .3s;
+
+}
+
+.calendar-month:hover,
+.calendar-year:hover {
+    color: #ffb700;
+    text-shadow: 0px 0px 3px #d39904;
+}
+
+.day-box {
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 3em;
+    height: 3em;
+    text-align: center;
+    padding-top: .75em;
+    margin-bottom: 1em;
+
+    transition: all ease-in-out .3s;
+}
+
+.day-box:hover {
+    background-color: #fab710;
+
+    -webkit-box-shadow: 1px 1px 24px 0px #fab710;
+    -moz-box-shadow: 1px 1px 24px 0px #fab710;
+    box-shadow: 1px 1px 24px 0px #fab710;
+}
+
+.day-box-disabled {
+    cursor: not-allowed;
+    color: #ccc;
+    background-color: rgba(204, 204, 204, 0.207);
+    border-radius: 5px;
+    width: 3em;
+    height: 3em;
+    text-align: center;
+    padding-top: .75em;
+    margin-bottom: 1em;
+
+    transition: all ease-in-out .3s;
+}
+
+/* Select Location Page */
+.location-options div {
+    width: 50%;
+    height: 15rem;
+
+    margin: 0 auto 3rem auto;
+
+    background-color: #eee;
+
+    border-radius: 5px;
+
+    text-align: center;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    cursor: pointer;
+
+    transition: all ease-in-out .1s;
+}
+
+.location-options div:hover {
+    opacity: .5;
+}
+
+.location-options .disabled {
+    opacity: .1;
+    cursor: not-allowed;
+}
+
+.location-options div img {
+    border-radius: 15px 15px 0px 0px;
+    width: 100%;
+    height: 75%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+/* Select Airport Page */
+.terminals {
+    margin-top: 3rem;
+}
+
+.terminals ul{
+    margin: 0;
+    padding: 0;
+}
+
+.terminals ul li {
+    background-color: #eee;
+    width: 25%;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 1rem;
+
+    transition: all ease-in-out .3s;
+}
+
+.terminals ul li:hover {
+
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.19);
+}

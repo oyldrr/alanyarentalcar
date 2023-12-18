@@ -75,16 +75,16 @@ session_start();
                             Services
                         </h6>
                         <p>
-                            <a href="rent.php" class="text-reset">Rental Car</a>
+                            <a href="rent.php" class="footer-links">Rental Car</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">VIP</a>
+                            <a href="#!" class="footer-links">VIP</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Transfer</a>
+                            <a href="#!" class="footer-links">Transfer</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Tours</a>
+                            <a href="#!" class="footer-links">Tours</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -96,16 +96,16 @@ session_start();
                             Useful links
                         </h6>
                         <p>
-                            <a href="about-us.php" class="text-reset">About us</a>
+                            <a href="about-us.php" class="footer-links">About us</a>
                         </p>
                         <p>
-                            <a href="account-settings.php" class="text-reset">Account Settings</a>
+                            <a href="account.php" class="footer-links">Account Settings</a>
                         </p>
                         <p>
-                            <a href="find-reservation.php" class="text-reset">Find Reservation</a>
+                            <a href="find-reservation.php" class="footer-links">Find Reservation</a>
                         </p>
                         <p>
-                            <a href="help-center.php" class="text-reset">Help Center</a>
+                            <a href="help-center.php" class="footer-links">Help Center</a>
                         </p>
                     </div>
                     <!-- Grid column -->

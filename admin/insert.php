@@ -12,7 +12,54 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 } else {
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($_GET['table'] == "users") {
-			$fullname = mysqli_real_escape_string($conn, $_POST['insert-name']);
+
+			// Configuration
+			$uploadDirectory = '../assets/images/user-images/';
+
+			// Get the uploaded file details
+			$fileName = basename($_FILES['insert-image']['name']);
+			$targetPath = $uploadDirectory . $fileName;
+			$uploadOk = 1;
+			$imageFileType = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
+
+			// Check if the file is an image
+			$check = getimagesize($_FILES['insert-image']['tmp_name']);
+			if ($check !== false) {
+				$uploadOk = 1;
+			} else {
+				echo "File is not an image.";
+				$uploadOk = 0;
+			}
+
+			// Check if the file already exists
+			if (file_exists($targetPath)) {
+				echo "Sorry, file already exists.";
+				$uploadOk = 0;
+			}
+
+			// Check file size (you can adjust the size limit)
+			if ($_FILES['insert-image']['size'] > 500000) {
+				echo "Sorry, your file is too large.";
+				$uploadOk = 0;
+			}
+
+			// Allow certain file formats (you can adjust the allowed formats)
+			if ($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'jpeg' && $imageFileType != 'gif') {
+				echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+				$uploadOk = 0;
+			}
+
+			if ($uploadOk) {
+				if (move_uploaded_file($_FILES['insert-image']['tmp_name'], $targetPath)) {
+					echo "image uploaded succesfully!";
+				} else {
+					header('location: users.php?image-couldnt-be-uploaded');
+				}
+			}
+
+
+			$name = mysqli_real_escape_string($conn, $_POST['insert-name']);
+			$surname = mysqli_real_escape_string($conn, $_POST['insert-surname']);
 			$email = mysqli_real_escape_string($conn, $_POST['insert-mail']);
 			$pwd = mysqli_real_escape_string($conn, $_POST['insert-password']);
 			$cpassword = mysqli_real_escape_string($conn, $_POST['insert-cpassword']);
@@ -22,23 +69,22 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 			$city = mysqli_real_escape_string($conn, $_POST['insert-city']);
 			$phone = mysqli_real_escape_string($conn, $_POST['insert-phone']);
 			$address = mysqli_real_escape_string($conn, $_POST['insert-address']);
-			$image = mysqli_real_escape_string($conn, $_POST['insert-image']);
-			$rank = mysqli_real_escape_string($conn, $_POST['insert-rank']);
-			$type = mysqli_real_escape_string($conn, $_POST['insert-type']);
+			$image = $fileName;
 			$active = mysqli_real_escape_string($conn, $_POST['insert-active']);
 
 			$insert = "INSERT INTO `users` 
-			(`uname`, `pwd`, `fullname`, `birthdate`, `country`, `province`, `city`, `phone`, `address`, `user_img`, `rank`, `type`, `active`) 
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			(`email`, `pwd`, `name`, `surname`, `birthdate`, `country`, `province`, `city`, `phone`, `address`, `user_img`, `active`)  
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			if ($stmt = mysqli_prepare($conn, $insert)) {
 				// Bind variables to the prepared statement as parameters
-				mysqli_stmt_bind_param($stmt, "sssssssssssss", $param_email, $param_password, $param_fullname, $param_birthday, $param_country, $param_province, $param_city, $param_phone, $param_address, $param_image, $param_rank, $param_type, $param_active);
+				mysqli_stmt_bind_param($stmt, "ssssssssssss", $param_email, $param_password, $param_name, $param_surname, $param_birthday, $param_country, $param_province, $param_city, $param_phone, $param_address, $param_image, $param_active);
 
 				// Set parameters
 				$param_email = $email;
 				$param_password = password_hash($pwd, PASSWORD_DEFAULT); // Creates a password hash
-				$param_fullname = $fullname;
+				$param_name = $name;
+				$param_surname = $surname;
 				$param_birthday = $birthday;
 				$param_country = $country;
 				$param_province = $province;
@@ -46,13 +92,10 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 				$param_phone = $phone;
 				$param_address = $address;
 				$param_image = $image;
-				$param_rank = $rank;
-				$param_type = $type;
 				$param_active = $active;
 
 				// Attempt to execute the prepared statement
 				if (mysqli_stmt_execute($stmt)) {
-					// Redirect to login page
 					header('location: users.php?insertion=successfull');
 					exit();
 				} else {
@@ -64,103 +107,83 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 			} else {
 				header('location: insert.php?table=users&mysqliproblem');
 			}
-		} elseif ($_GET['table'] == "supporters") {
-			$name = mysqli_real_escape_string($conn, $_POST['insert-name']);
-			$message = mysqli_real_escape_string($conn, $_POST['insert-message']);
-			$amount = mysqli_real_escape_string($conn, $_POST['insert-amount']);
-			$image = mysqli_real_escape_string($conn, $_POST['insert-image']);
+		} elseif ($_GET['table'] == "cars") {
+			// Configuration
+			$uploadDirectory = '../assets/images/cars/';
+
+			// Get the uploaded file details
+			$fileName = basename($_FILES['insert-car-image']['name']);
+			$targetPath = $uploadDirectory . $fileName;
+			$uploadOk = 1;
+			$imageFileType = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
+
+			// Check if the file is an image
+			$check = getimagesize($_FILES['insert-car-image']['tmp_name']);
+			if ($check !== false) {
+				$uploadOk = 1;
+			} else {
+				echo "File is not an image.";
+				$uploadOk = 0;
+			}
+
+			// Check if the file already exists
+			if (file_exists($targetPath)) {
+				echo "Sorry, file already exists.";
+				$uploadOk = 0;
+			}
+
+			// Check file size (you can adjust the size limit)
+			if ($_FILES['insert-car-image']['size'] > 500000) {
+				echo "Sorry, your file is too large.";
+				$uploadOk = 0;
+			}
+
+			// Allow certain file formats (you can adjust the allowed formats)
+			if ($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'jpeg' && $imageFileType != 'gif') {
+				echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+				$uploadOk = 0;
+			}
+
+			if ($uploadOk) {
+				if (move_uploaded_file($_FILES['insert-car-image']['tmp_name'], $targetPath)) {
+					echo "image uploaded succesfully!";
+				} else {
+					header('location:cars.php?image-couldnt-be-uploaded');
+				}
+			}
+
+			$image = $fileName;
+			$model = mysqli_real_escape_string($conn, $_POST['insert-model']);
+			$gear = mysqli_real_escape_string($conn, $_POST['insert-gear']);
+			$fuel = mysqli_real_escape_string($conn, $_POST['insert-fuel']);
+			$class = mysqli_real_escape_string($conn, $_POST['insert-class']);
+			$year = mysqli_real_escape_string($conn, $_POST['insert-year']);
+			$km = mysqli_real_escape_string($conn, $_POST['insert-km']);
+			$color = mysqli_real_escape_string($conn, $_POST['insert-color']);
 			$active = mysqli_real_escape_string($conn, $_POST['insert-active']);
-			$tag = mysqli_real_escape_string($conn, $_POST['insert-tag']);
 
-			$insert = "INSERT INTO 
-			`supporters` (`name`, `message`, `amount`, `image`, `active`, `tag`)
-			VALUES (?, ?, ?, ?, ?, ?)";
-
+			$insert = "INSERT INTO `cars` 
+			(`image`, `model`, `gear`, `fuel`, `class`, `year`, `km`, `color`, `active`)  
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			if ($stmt = mysqli_prepare($conn, $insert)) {
 				// Bind variables to the prepared statement as parameters
-				mysqli_stmt_bind_param($stmt, "ssssss", $param_name, $param_message, $param_amount, $param_image, $param_active, $param_tag);
+				mysqli_stmt_bind_param($stmt, "sssssssss", $param_image, $param_model, $param_gear, $param_fuel, $param_class, $param_year, $param_km, $param_color, $param_active);
 
 				// Set parameters
-				$param_name = $name;
-				$param_message = $message;
-				$param_amount = $amount;
 				$param_image = $image;
-				$param_active = $active;
-				$param_tag = $tag;
-
-				// Attempt to execute the prepared statement
-				if (mysqli_stmt_execute($stmt)) {
-					// Redirect to login page
-					header('location: supporters.php?insertion=successfull');
-					exit();
-				} else {
-					echo "Oops! Something went wrong. Please try again later.";
-				}
-
-				// Close statement
-				mysqli_stmt_close($stmt);
-			} else {
-				header('location: supporters.php?mysqliproblem');
-			}
-		} elseif ($_GET['table'] == "supply") {
-			$water = mysqli_real_escape_string($conn, $_POST['insert-water']);
-			$food = mysqli_real_escape_string($conn, $_POST['insert-food']);
-			$education = mysqli_real_escape_string($conn, $_POST['insert-education']);
-			$shelter = mysqli_real_escape_string($conn, $_POST['insert-shelter']);
-			$entered_by = mysqli_real_escape_string($conn, $_POST['insert-entered_by']);
-
-			$insert = "INSERT INTO 
-			`supply` (`water`, `food`, `education`, `shelter`, `entered_by`)
-			VALUES (?, ?, ?, ?, ?)";
-
-
-			if ($stmt = mysqli_prepare($conn, $insert)) {
-				// Bind variables to the prepared statement as parameters
-				mysqli_stmt_bind_param($stmt, "sssss", $param_water, $param_food, $param_education, $param_shelter, $param_entered_by);
-
-				// Set parameters
-				$param_water = $water;
-				$param_food = $food;
-				$param_education = $education;
-				$param_shelter = $shelter;
-				$param_entered_by = $entered_by;
-
-				// Attempt to execute the prepared statement
-				if (mysqli_stmt_execute($stmt)) {
-					// Redirect to login page
-					header('location: supply.php?insertion=successfull');
-					exit();
-				} else {
-					echo "Oops! Something went wrong. Please try again later.";
-				}
-
-				// Close statement
-				mysqli_stmt_close($stmt);
-			} else {
-				header('location: supply.php?mysqliproblem');
-			}
-		} elseif ($_GET['table'] == "newsletter") {
-			$email = mysqli_real_escape_string($conn, $_POST['insert-email']);
-			$active = mysqli_real_escape_string($conn, $_POST['insert-active']);
-
-			$insert = "INSERT INTO 
-			`newsletter` (`email`, `active`)
-			VALUES (?, ?)";
-
-
-			if ($stmt = mysqli_prepare($conn, $insert)) {
-				// Bind variables to the prepared statement as parameters
-				mysqli_stmt_bind_param($stmt, "ss", $param_email, $param_active);
-
-				// Set parameters
-				$param_email = $email;
+				$param_model = $model;
+				$param_gear = $gear;
+				$param_fuel = $fuel;
+				$param_class = $class;
+				$param_year = $year;
+				$param_km = $km;
+				$param_color = $color;
 				$param_active = $active;
 
 				// Attempt to execute the prepared statement
 				if (mysqli_stmt_execute($stmt)) {
-					// Redirect to login page
-					header('location: newsletter.php?insertion=successfull');
+					header('location: cars.php?insertion=successfull');
 					exit();
 				} else {
 					echo "Oops! Something went wrong. Please try again later.";
@@ -169,7 +192,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 				// Close statement
 				mysqli_stmt_close($stmt);
 			} else {
-				header('location: newsletter.php?mysqliproblem');
+				header('location: insert.php?table=cars&mysqliproblem');
 			}
 		}
 	}
@@ -185,7 +208,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Insert - Quakefocus Admin</title>
+	<title>Insert - Alanya Rental Car Admin</title>
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 	<link href="css/styles.css" rel="stylesheet" />
 
@@ -205,14 +228,15 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="content py-5 d-flex justify-content-center">
-				<form action="" method="POST" class="w-50 text-light">
+				<form action="" method="POST" enctype="multipart/form-data" class="w-50 text-light">
 					<?php
 					if ($_GET['table'] == "users") {
 						echo "
 							<!-- Name input -->
 							<h5 class='text-dark'>Personal Info (Required)</h5>
 							<div class='form-outline mb-4'>
-								<input required class='form-control me-1' placeholder='Full name' name='insert-name' type='text'>
+								<input required class='form-control me-1' placeholder='Name' name='insert-name' type='text'>
+								<input required class='form-control me-1' placeholder='Surname' name='insert-surname' type='text'>
 								<input required class='form-control' placeholder='E-mail' name='insert-mail' id='mail' type='email'>
 							</div>
 
@@ -252,8 +276,6 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 							<!-- Only Admins -->
 							<h5 class='text-dark'>Only Admins (Optional)</h5>
 							<div class='form-outline mb-4'>
-								<input class='form-control me-1' placeholder='Rank' name='insert-rank' type='text'>
-								<input class='form-control' placeholder='Type' name='insert-type' type='text'>
 								<input class='form-control' placeholder='Active' name='insert-active' type='text'>
 							</div>
 							<!-- 2 column grid layout for inline styling -->
@@ -263,116 +285,72 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 									<input type='submit' class='btn btn-primary mb-4 w-100' value='Insert the record'>
 								</div>
 							</div>";
-					} elseif ($_GET['table'] == "supporters") {
-
+					} elseif ($_GET['table'] == "cars") {
 						echo "
-                        <!-- Name input -->
-                        <h5 class='text-dark'>Name</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Name' name='insert-name' type='text'>
-                        </div>
+							<!-- Image -->
+							<h5 class='text-dark'>Image (Required)</h5>
+							<div class='form-outline mb-4'>
+								<input class='form-control me-1' placeholder='Image' name='insert-car-image' type='file'>
+							</div>
+							
+							<!-- Model input -->
+							<h5 class='text-dark'>Car Information (Required)</h5>
+							<div class='form-outline mb-4'>
+								<input required class='form-control me-1 mb-3' placeholder='Model' name='insert-model' type='text'>
+								<select required class='form-control me-1 mb-3' placeholder='Gear' name='insert-gear'>
+									<option value='' disabled selected>Gear</option>
+									<option value='Manual'>Manual Transmission</option>
+									<option value='Automatic'>Automatic Transmission</option>
+									<option value='Semi-Automatic'>Semi-Automatic Transmission</option>
+									<option value='Continuous Variable'>Continuous Variable Transmission</option>
+									<option value='Dual-Clutch'>Dual-Clutch Transmission</option>
+									<option value='Automated Manual'>Automated Manual Transmission</option>
+								</select>
+								<select required class='form-control me-1 mb-3' placeholder='Fuel' name='insert-fuel' type='text'>
+									<option value='' disabled selected>Fuel</option>
+									<option value='Gasoline'>Gasoline</option>
+									<option value='Diesel'>Diesel</option>
+									<option value='LPG'>LPG (Liquid Petroleum Gas)</option>
+									<option value='Electricity'>Electricity</option>
+								</select>
 
-                        <!-- Message input -->
-                        <h5 class='text-dark'>Message</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Message' name='insert-message' type='text'>
-                        </div>
+								<select required class='form-control me-1 mb-3' placeholder='Class' name='insert-class' type='text'>
+									<option value='' disabled selected>Class</option>
+									<option value='Sedan'>Sedan</option>
+									<option value='Hatchback'>Hatchback</option>
+									<option value='SUV'>SUV (Sport Utility Vehicle)</option>
+									<option value='Coupe'>Coupe</option>
+									<option value='Cabriolet'>Cabriolet</option>
+									<option value='Minivan'>Minivan</option>
+								</select>
 
-                        <!-- Amount input -->
-                        <h5 class='text-dark'>Amount</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Amount' name='insert-amount' type='text'>
-                        </div>
+								<input required class='form-control me-1 mb-3' placeholder='Year' name='insert-year' type='text'>
+								<input required class='form-control me-1 mb-3' placeholder='KM' name='insert-km' type='text'>
+								
+								<select required class='form-control me-1 mb-3' placeholder='Color' name='insert-color' type='text'>
+									<option value='' disabled selected>Color</option>
+									<option value='White'>White</option>
+									<option value='Black'>Black</option>
+									<option value='Silver/Gray'>Silver/Gray</option>
+									<option value='Blue'>Blue</option>
+									<option value='Red'>Red</option>
+									<option value='Yellow'>Yellow</option>
+									<option value='Other'>Other</option>
+								</select>
+							</div>
 
-                        <!-- Image input -->
-                        <h5 class='text-dark'>Image</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Image' name='insert-image' type='text'>
-                        </div>
-
-                        <!-- Active input -->
-                        <h5 class='text-dark'>Active</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Active' name='insert-active' type='text'>
-                        </div>
-
-                        <!-- Tag input -->
-                        <h5 class='text-dark'>Tag</h5>
-                        <div class='form-outline mb-4'>
-                            <select required class='form-control me-1' name='insert-tag'>
-								<option value='firm'>Firm</option>
-								<option value='voluntarily'>Voluntarily</option>
-								<option value='financially'>Financially</option>
-							</select>
-                        </div>
-
-                        <div class='row mb-4'>
-                            <div class='col'>
-                                <!-- Submit button -->
-                                <input type='submit' class='btn btn-primary mb-4 w-100' value='Insert the record'>
-                            </div>
-                        </div>
-						";
-					} elseif ($_GET['table'] == "supply") {
-						echo "
-                        <!-- Water input -->
-                        <h5 class='text-dark'>Water</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Water' name='insert-water' type='text'>
-                        </div>
-
-                        <!-- Food input -->
-                        <h5 class='text-dark'>Food</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Food' name='insert-food' type='text'>
-                        </div>
-
-                        <!-- Education input -->
-                        <h5 class='text-dark'>Education</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Education' name='insert-education' type='text'>
-                        </div>
-
-                        <!-- Shelter input -->
-                        <h5 class='text-dark'>Shelter</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Shelter' name='insert-shelter' type='text'>
-                        </div>
-
-                        <!-- Entered By input -->
-                        <h5 class='text-dark'>Entered By</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Entered By' name='insert-entered_by' type='text'>
-                        </div>
-
-                        <div class='row mb-4'>
-                            <div class='col'>
-                                <!-- Submit button -->
-                                <input type='submit' class='btn btn-primary mb-4 w-100' value='Insert the record'>
-                            </div>
-                        </div>
-						";
-					} elseif ($_GET['table'] == "newsletter") {
-						echo "
-                        <!-- Email input -->
-                        <h5 class='text-dark'>Email</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Email' name='insert-email' type='text'>
-                        </div>
-
-						<!-- Active input -->
-                        <h5 class='text-dark'>Active</h5>
-                        <div class='form-outline mb-4'>
-                            <input required class='form-control me-1' placeholder='Active' name='insert-active' type='text'>
-                        </div>
-
-                        <div class='row mb-4'>
-                            <div class='col'>
-                                <!-- Submit button -->
-                                <input type='submit' class='btn btn-primary mb-4 w-100' value='Insert the record'>
-                            </div>
-                        </div>
-						";
+							<!-- Important -->
+							<h5 class='text-dark'>Important (Required)</h5>
+							<div class='form-outline mb-4'>
+								<input class='form-control' placeholder='Active' name='insert-active' type='text'>
+							</div>
+							<!-- 2 column grid layout for inline styling -->
+							<div class='row mb-4'>
+								<div class='col'>
+									<!-- Submit button -->
+									<input type='submit' class='btn btn-primary mb-4 w-100' value='Insert the record'>
+								</div>
+							</div>";
 					} else {
 						include_once '404.html';
 					}
@@ -385,7 +363,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 		<footer class="py-4 bg-light mt-auto">
 			<div class="container-fluid px-4">
 				<div class="d-flex align-items-center justify-content-between small">
-					<div class="text-muted">Copyright &copy; QuakeFocus</div>
+					<div class="text-muted">Copyright &copy; Alanya Rental Car</div>
 				</div>
 			</div>
 		</footer>

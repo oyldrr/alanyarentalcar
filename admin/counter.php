@@ -282,7 +282,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 
         // Create an array with month names
         $months = [
-            'October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
+            'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September'
         ];
 
@@ -314,7 +314,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
         $monthlyVisitsJSON = json_encode($monthlyVisits);
 
         // Generate month labels
-        $monthLabels = array('October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
+        $monthLabels = array('November', 'December', 'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September');
 
         //for ($i = 0; $i < 12; $i++) {

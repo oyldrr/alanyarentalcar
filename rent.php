@@ -55,81 +55,90 @@ require_once "config/connection.php";
         </div>
 
         <div class="cars-container w-75 m-5">
-            <div class="car-card border mb-3 p-3 rounded d-flex" data-aos="fade-up" data-aos-delay="100">
+            <?php
+            // Getting all the cars which is active and ordering by newest to oldest
+            $stmt = $conn->prepare('SELECT * FROM cars WHERE active = 1 ORDER BY created_At DESC');
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) :
+            ?>
+                <div class="car-card border mb-3 p-3 rounded d-flex" data-aos="fade-up" data-aos-delay="100">
 
-                <div class="card-col w-50 me-3">
-                    <div class="car-image w-100">
-                        <img width="100%" class="rounded" src="assets/images/cars/placeholder.jpg" alt="">
+                    <div class="card-col w-50 me-3">
+                        <div class="car-image w-100">
+                            <img width="100%" class="rounded" src="assets/images/cars/<?= $row['image'] ?>" alt="">
+                        </div>
+                        <h5 class="text-uppercase pt-3"><?= $row['model'] ?></h5>
+                        <p>or similar</p>
                     </div>
-                    <h5 class="text-uppercase pt-3">car model</h5>
-                    <p>or similar</p>
+
+                    <div class="card-col w-25">
+                        <div class="gear mt-2 mb-4">
+                            <i class="fas fa-gear"></i>
+                            <span><?= $row['gear'] ?></span>
+                        </div>
+
+                        <div class="fuel mb-4">
+                            <i class="fas fa-gas-pump"></i>
+                            <span><?= $row['fuel'] ?></span>
+                        </div>
+
+                        <div class="class">
+                            <i class="fas fa-car"></i>
+                            <span><?= $row['class'] ?></span>
+                        </div>
+                    </div>
+
+                    <div class="card-col w-100 text-center">
+                        <p class="deposit mb-4 py-1">
+                            <i class="fas fa-money-bill"></i>
+                            <b>Deposit:</b>
+                            <span id="deposit-price">10</span>
+                            <span id="cuurency">$</span>
+                        </p>
+
+                        <p class="total-distance mb-4">
+                            <i class="fas fa-road"></i>
+                            <b>Total mileage limit:</b>
+                            <span id="distance-value">1000</span>
+                            <span id="unit">km</span>
+                        </p>
+
+                        <p class="pickup-location">
+                            <i class="fas fa-location"></i>
+                            <b>Pickup location:</b>
+                            <span id="pickup-location">Airport</span>
+                        </p>
+
+
+                        <div class="d-flex justify-content-end mt-4 me-5">
+                            <span class="h1">100</span>
+                            .00
+                            <span class="currency">$</span>
+                        </div>
+                    </div>
+
+                    <div class="card-col w-50 text-right">
+                        <img class="agency-img" src="assets/images/agencies/aymon.png" alt="agency-img">
+                        <p>
+                            <!-- Display stars agency points -->
+                            <i class="fa fa-star text-yellow"></i>
+                            <i class="fa fa-star text-yellow"></i>
+                            <i class="fa fa-star text-yellow"></i>
+                            <i class="fa fa-star text-yellow"></i>
+                            <i class="fa fa-star text-yellow"></i>
+                        </p>
+
+                        <a class="text-dark" href="agency-comments.php"><i>comments</i></a>
+
+                        <a class="btn btn-yellow mt-5 w-100" href="details.php?id=<?= $row['id'] ?>">Select</a>
+                    </div>
+
                 </div>
 
-                <div class="card-col w-25">
-                    <div class="gear mt-2 mb-4">
-                        <i class="fas fa-gear"></i>
-                        <span>Gear</span>
-                    </div>
-
-                    <div class="fuel mb-4">
-                        <i class="fas fa-gas-pump"></i>
-                        <span>Fuel</span>
-                    </div>
-
-                    <div class="class">
-                        <i class="fas fa-car"></i>
-                        <span>Class</span>
-                    </div>
-                </div>
-
-                <div class="card-col w-100 text-center">
-                    <p class="deposit mb-4 py-1">
-                        <i class="fas fa-money-bill"></i>
-                        <b>Deposit:</b>
-                        <span id="deposit-price">10</span>
-                        <span id="cuurency">$</span>
-                    </p>
-
-                    <p class="total-distance mb-4">
-                        <i class="fas fa-road"></i>
-                        <b>Total mileage limit:</b>
-                        <span id="distance-value">1000</span>
-                        <span id="unit">km</span>
-                    </p>
-
-                    <p class="pickup-location">
-                        <i class="fas fa-location"></i>
-                        <b>Pickup location:</b>
-                        <span id="pickup-location">Airport</span>
-                    </p>
-
-                    
-                    <div class="d-flex justify-content-end mt-4 me-5">
-                        <span class="h1">100</span>
-                        .00
-                        <span class="currency">$</span>
-                    </div>
-                </div>
-
-                <div class="card-col w-50 text-right">
-                    <img class="agency-img" src="assets/images/agencies/aymon.png" alt="agency-img">
-                    <p>
-                        <!-- Display stars agency points -->
-                        <i class="fa fa-star text-yellow"></i>
-                        <i class="fa fa-star text-yellow"></i>
-                        <i class="fa fa-star text-yellow"></i>
-                        <i class="fa fa-star text-yellow"></i>
-                        <i class="fa fa-star text-yellow"></i>
-                    </p>
-
-                    <a class="text-dark" href="agency-comments.php"><i>comments</i></a>
-
-                    <a class="btn btn-yellow mt-5 w-100" href="details.php">Select</a>
-                </div>
-
-            </div>
-
-
+            <?php
+            endwhile;
+            ?>
 
         </div>
     </div>

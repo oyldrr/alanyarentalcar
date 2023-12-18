@@ -47,11 +47,20 @@ require_once "config/connection.php";
         <div class="car-detail-container m-5">
             <h1 class="text-uppercase text-yellow text-center mb-3">details</h1>
             <div class="car-detail-card mb-3 p-3 rounded d-flex">
+                <?php
+                // Getting the car information
+                $id = $_GET['id'];
+
+                $stmt = $conn->prepare('SELECT * FROM cars WHERE id = ' . $id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                ?>
                 <div class="card-col w-100 me-3">
                     <div class="car-detail-image w-100">
-                        <img width="100%" class="rounded" src="assets/images/cars/placeholder.jpg" alt="">
+                        <img width="100%" class="rounded" src="assets/images/cars/<?= $row['image'] ?>" alt="">
                     </div>
-                    <h5 class="text-uppercase pt-3">car model</h5>
+                    <h5 class="text-uppercase pt-3"><?= $row['model'] ?></h5>
                     <p>or similar</p>
                 </div>
 
@@ -60,34 +69,34 @@ require_once "config/connection.php";
                     <div class="d-flex justify-content-between w-50 mx-auto mb-5 pb-5">
                         <div class="gear">
                             <i class="fas fa-gear"></i>
-                            <span>Gear</span>
+                            <span><?= $row['gear'] ?></span>
                         </div>
 
                         <div class="fuel">
                             <i class="fas fa-gas-pump"></i>
-                            <span>Fuel</span>
+                            <span><?= $row['fuel'] ?></span>
                         </div>
 
                         <div class="class">
                             <i class="fas fa-car"></i>
-                            <span>Class</span>
+                            <span><?= $row['class'] ?></span>
                         </div>
                     </div>
 
                     <div class="d-flex justify-content-between w-50 mx-auto mb-5">
                         <div class="year">
                             <i class="fas fa-calendar"></i>
-                            <span>Year</span>
+                            <span><?= $row['year'] ?></span>
                         </div>
 
                         <div class="km">
                             <i class="fas fa-tachometer-alt"></i>
-                            <span>Km</span>
+                            <span><?= $row['km'] ?></span>
                         </div>
 
                         <div class="color">
                             <i class="fa-solid fa-paint-roller"></i>
-                            <span>Color</span>
+                            <span><?= $row['color'] ?></span>
                         </div>
                     </div>
 

@@ -122,11 +122,33 @@ require_once "config/connection.php";
                         <img class="agency-img" src="assets/images/agencies/aymon.png" alt="agency-img">
                         <p>
                             <!-- Display stars agency points -->
-                            <i class="fa fa-star text-yellow"></i>
-                            <i class="fa fa-star text-yellow"></i>
-                            <i class="fa fa-star text-yellow"></i>
-                            <i class="fa fa-star text-yellow"></i>
-                            <i class="fa fa-star text-yellow"></i>
+                            <?php 
+                                if ($row['stars'] == 1) {
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                }
+                                elseif ($row['stars'] == 2) {
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                }
+                                elseif ($row['stars'] == 3) {
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                }
+                                elseif ($row['stars'] == 4) {
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                }
+                                elseif ($row['stars'] == 5) {
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                    echo "<i class='fa fa-star text-yellow'></i>";
+                                }
+                                ?>
                         </p>
 
                         <a class="text-dark" href="agency-comments.php"><i>comments</i></a>

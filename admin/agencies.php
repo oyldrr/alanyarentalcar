@@ -37,7 +37,6 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
     <?php
     include_once "sidenav.html";
     ?>
-
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
@@ -46,10 +45,85 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                     <li class="breadcrumb-item active">Agencies</li>
                 </ol>
 
-                <?php 
-                include_once "404.html";
-                ?>
 
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between">
+                        <div>
+                            <i class="fas fa-shop me-1"></i>
+                            Agency Records
+                        </div>
+                        <a class="btn btn-dark " href="insert.php?table=agencies">Create new <i class="fas fa-plus-circle"></i></a>
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>#</th>
+                                    <th>Logo</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Location</th>
+                                    <th>Stars</th>
+                                    <th>Active</th>
+                                    <th>Updated At</th>
+                                    <th>Created At</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>#</th>
+                                    <th>Logo</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Location</th>
+                                    <th>Stars</th>
+                                    <th>Active</th>
+                                    <th>Updated At</th>
+                                    <th>Created At</th>
+                                </tr>
+                            </tfoot>
+
+                            <tbody>
+                                <?php
+                                // Getting all the users which is active and ordering by newest to oldest
+                                $stmt = $conn->prepare("SELECT *  FROM agencies ORDER BY created_at DESC");
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                while ($row = $result->fetch_assoc()) :
+                                ?>
+                                    <tr>
+                                        <td>
+                                            <a class="btn btn-link text-dark" href="update.php?table=agencies&id=<?= $row['id'] ?>">
+                                                <i class="fas fa-cog">
+                                                </i>
+                                            </a>
+                                        </td>
+                                        <td><?= $row['id'] ?></td>
+                                        <td>
+                                            <img width="30%" src="../assets/images/agencies/<?= $row['logo'] ?>" alt="<?= $row['logo'] ?>">
+                                        </td>
+                                        <td><?= $row['name'] ?></td>
+                                        <td><?= $row['phone'] ?></td>
+                                        <td><?= $row['email'] ?></td>
+                                        <td><?= $row['location'] ?></td>
+                                        <td><?= $row['stars'] ?></td>
+                                        <td><?= $row['active'] ?></td>
+                                        <td><?= $row['updated_at'] ?></td>
+                                        <td><?= $row['created_at'] ?></td>
+                                    </tr>
+
+                                <?php
+                                endwhile;
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">

@@ -194,6 +194,87 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 			} else {
 				header('location: insert.php?table=cars&mysqliproblem');
 			}
+		} elseif ($_GET['table'] == "agencies") {
+			// Configuration
+			$uploadDirectory = '../assets/images/agencies/';
+
+			// Get the uploaded file details
+			$fileName = basename($_FILES['insert-agency-image']['name']);
+			$targetPath = $uploadDirectory . $fileName;
+			$uploadOk = 1;
+			$imageFileType = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
+
+			// Check if the file is an image
+			$check = getimagesize($_FILES['insert-agency-image']['tmp_name']);
+			if ($check !== false) {
+				$uploadOk = 1;
+			} else {
+				echo "File is not an image.";
+				$uploadOk = 0;
+			}
+
+			// Check if the file already exists
+			if (file_exists($targetPath)) {
+				echo "Sorry, file already exists.";
+				$uploadOk = 0;
+			}
+
+			// Check file size (you can adjust the size limit)
+			if ($_FILES['insert-agency-image']['size'] > 500000) {
+				echo "Sorry, your file is too large.";
+				$uploadOk = 0;
+			}
+
+			// Allow certain file formats (you can adjust the allowed formats)
+			if ($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'jpeg' && $imageFileType != 'gif') {
+				echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+				$uploadOk = 0;
+			}
+
+			if ($uploadOk) {
+				if (move_uploaded_file($_FILES['insert-agency-image']['tmp_name'], $targetPath)) {
+					echo "image uploaded succesfully!";
+				} else {
+					header('location:agencies.php?image-couldnt-be-uploaded');
+				}
+			}
+
+			$logo = $fileName;
+			$name = mysqli_real_escape_string($conn, $_POST['insert-name']);
+			$phone = mysqli_real_escape_string($conn, $_POST['insert-phone']);
+			$email = mysqli_real_escape_string($conn, $_POST['insert-email']);
+			$location = mysqli_real_escape_string($conn, $_POST['insert-location']);
+			$stars = mysqli_real_escape_string($conn, $_POST['insert-stars']);
+
+			$insert = "INSERT INTO `agencies` 
+			(`logo`, `name`, `phone`, `email`, `location`, `stars`)  
+			VALUES (?, ?, ?, ?, ?, ?)";
+
+			if ($stmt = mysqli_prepare($conn, $insert)) {
+				// Bind variables to the prepared statement as parameters
+				mysqli_stmt_bind_param($stmt, "ssssss", $param_logo, $param_name, $param_phone, $param_email, $param_location, $param_stars);
+
+				// Set parameters
+				$param_logo = $logo;
+				$param_name = $name;
+				$param_phone = $phone;
+				$param_email = $email;
+				$param_location = $location;
+				$param_stars = $stars;
+
+				// Attempt to execute the prepared statement
+				if (mysqli_stmt_execute($stmt)) {
+					header('location: agencies.php?insertion=successfull');
+					exit();
+				} else {
+					echo "Oops! Something went wrong. Please try again later.";
+				}
+
+				// Close statement
+				mysqli_stmt_close($stmt);
+			} else {
+				header('location: insert.php?table=agencies&mysqliproblem');
+			}
 		}
 	}
 }
@@ -343,6 +424,38 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 							<h5 class='text-dark'>Important (Required)</h5>
 							<div class='form-outline mb-4'>
 								<input class='form-control' placeholder='Active' name='insert-active' type='text'>
+							</div>
+							<!-- 2 column grid layout for inline styling -->
+							<div class='row mb-4'>
+								<div class='col'>
+									<!-- Submit button -->
+									<input type='submit' class='btn btn-primary mb-4 w-100' value='Insert the record'>
+								</div>
+							</div>";
+					} elseif ($_GET['table'] == "agencies") {
+						echo "
+							<!-- Image -->
+							<h5 class='text-dark'>Image (Required)</h5>
+							<div class='form-outline mb-4'>
+								<input class='form-control me-1' placeholder='Image' name='insert-agency-image' type='file'>
+							</div>
+							
+							<!-- Model input -->
+							<h5 class='text-dark'>Agency Information (Required)</h5>
+							<div class='form-outline mb-4'>
+								<input required class='form-control me-1 mb-3' placeholder='Name' name='insert-name' type='text'>
+								<input required class='form-control me-1 mb-3' placeholder='Phone' name='insert-phone' type='tel'>
+								<input required class='form-control me-1 mb-3' placeholder='Email' name='insert-email' type='email'>
+								<input required class='form-control me-1 mb-3' placeholder='Location' name='insert-location' type='text'>
+
+								<select required class='form-control me-1 mb-3' placeholder='Stars' name='insert-stars' type='text'>
+									<option value='' disabled selected>Stars</option>
+									<option value='1'>⭐</option>
+									<option value='2'>⭐⭐</option>
+									<option value='3'>⭐⭐⭐</option>
+									<option value='4'>⭐⭐⭐⭐</option>
+									<option value='5'>⭐⭐⭐⭐⭐</option>
+								</select>
 							</div>
 							<!-- 2 column grid layout for inline styling -->
 							<div class='row mb-4'>

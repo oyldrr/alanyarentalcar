@@ -157,7 +157,7 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                 if (move_uploaded_file($_FILES['update-car-image']['tmp_name'], $targetPath)) {
                     echo "image uploaded succesfully!";
                 } else {
-                    header('location: users.php?image-couldnt-be-uploaded');
+                    header('location: agencies.php?image-couldnt-be-uploaded');
                 }
             }
 
@@ -206,6 +206,46 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
                 mysqli_stmt_close($stmt);
             } else {
                 header('location: cars.php?mysqliproblem');
+            }
+        } elseif ($_GET['table'] == "agencies") {
+            $name = mysqli_real_escape_string($conn, $_POST['update-name']);
+            $phone = mysqli_real_escape_string($conn, $_POST['update-phone']);
+            $email = mysqli_real_escape_string($conn, $_POST['update-email']);
+            $location = mysqli_real_escape_string($conn, $_POST['update-location']);
+            $stars = mysqli_real_escape_string($conn, $_POST['update-stars']);
+            $active = mysqli_real_escape_string($conn, $_POST['update-active']);
+
+            $update = "UPDATE `agencies` SET 
+            `name` = ?, `phone` = ?, `email` = ?,  
+            `location` = ?, `stars` = ?, `active` = ?
+            WHERE id = ?";
+
+
+            if ($stmt = mysqli_prepare($conn, $update)) {
+                // Bind variables to the prepared statement as parameters
+                mysqli_stmt_bind_param($stmt, "ssssss", $param_name, $param_phone, $param_email, $param_location, $param_stars, $param_active);
+
+                // Set parameters
+                $param_name = $name;
+                $param_phone = $phone;
+                $param_email = $email;
+                $param_location = $location;
+                $param_stars = $stars;
+                $param_active = $active;
+
+                // Attempt to execute the prepared statement
+                if (mysqli_stmt_execute($stmt)) {
+                    // Redirect to login page
+                    header('location: agencies.php?update=successfull');
+                    exit();
+                } else {
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+
+                // Close statement
+                mysqli_stmt_close($stmt);
+            } else {
+                header('location: agencies.php?mysqliproblem');
             }
         }
     }
@@ -371,6 +411,78 @@ if (isset($_SESSION["adminLoggedin"]) !== true) {
 							<div class='form-outline mb-4'>
 								<input class='form-control' placeholder='Active' name='update-active' type='text' value='" . $row['active'] . "'>
 							</div>
+							<!-- 2 column grid layout for inline styling -->
+							<div class='row mb-4'>
+								<div class='col'>
+									<!-- Submit button -->
+									<input type='submit' class='btn btn-primary mb-4 w-100' value='update the record'>
+								</div>
+							</div>";
+                    } elseif ($_GET['table'] == "agencies") {
+
+                        $stmt = $conn->prepare('SELECT * FROM agencies WHERE id = ' . $id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $row = $result->fetch_assoc();
+
+                        echo "
+							
+							<!-- name input -->
+							<h5 class='text-dark'>Agency Information</h5>
+							<div class='form-outline mb-4'>
+								<input class='form-control me-1 mb-3' placeholder='name' name='update-name' type='text' value='" . $row['name'] . "'>
+								<input class='form-control me-1 mb-3' placeholder='phone' name='update-phone' type='text' value='" . $row['phone'] . "'>
+								<input class='form-control me-1 mb-3' placeholder='email' name='update-email' type='text' value='" . $row['email'] . "'>
+								<input class='form-control me-1 mb-3' placeholder='location' name='update-location' type='text' value='" . $row['location'] . "'>
+
+								<select required class='form-control me-1 mb-3' placeholder='Stars' name='update-stars' type='text'>
+                                ";
+                        switch ($row['stars']) {
+                            case 1:
+                                echo "<option value='1 selected'>⭐</option>         
+                                      <option value='2'>⭐⭐</option>
+                                      <option value='3'>⭐⭐⭐</option>
+                                      <option value='4'>⭐⭐⭐⭐</option>
+                                      <option value='5'>⭐⭐⭐⭐⭐</option>	";
+
+                            case 2:
+                                echo "<option value='1'>⭐</option>  
+                                      <option value='2 selected'>⭐⭐</option>
+                                      <option value='3'>⭐⭐⭐</option>
+                                      <option value='4'>⭐⭐⭐⭐</option>
+                                      <option value='5'>⭐⭐⭐⭐⭐</option>	";
+                            case 3:
+                                echo "<option value='1'>⭐</option>
+                                      <option value='2'>⭐⭐</option>
+                                      <option value='3 selected'>⭐⭐⭐</option>
+                                      <option value='4'>⭐⭐⭐⭐</option>
+                                      <option value='5'>⭐⭐⭐⭐⭐</option>";
+                            case 4:
+                                echo "<option value='1'>⭐</option>
+                                      <option value='2'>⭐⭐</option>
+                                      <option value='3'>⭐⭐⭐</option>
+                                      <option value='4 selected'>⭐⭐⭐⭐</option>
+                                      <option value='5'>⭐⭐⭐⭐⭐</option>";
+                            case 5:
+                                echo "<option value='1'>⭐</option>
+                                      <option value='2'>⭐⭐</option>
+                                      <option value='3'>⭐⭐⭐</option>
+                                      <option value='4'>⭐⭐⭐⭐</option>
+                                      <option value='5' selected>⭐⭐⭐⭐⭐</option>";
+                        }
+                        echo
+                        "
+								</select>
+							</div>
+
+							<!-- Important -->
+							<h5 class='text-dark'>Important</h5>
+							<div class='form-outline mb-4'>
+                            <select required class='form-control me-1 mb-3' placeholder='Active' name='update-active' type='text' value'" . $row['active'] . "'>
+                                <option value='1' selected>Active</option>
+                                <option value='0'>Not Active</option>
+							</div>
+
 							<!-- 2 column grid layout for inline styling -->
 							<div class='row mb-4'>
 								<div class='col'>
